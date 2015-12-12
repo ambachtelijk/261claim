@@ -11,7 +11,12 @@
 
     </head>
     <body>
-<?php include('nav.php'); ?>
+<?php //include('nav.php'); ?>
 
+        <div class="container-fluid" style="background: url(/html/media/image/terminal-airport.jpg) no-repeat center center; background-size: cover; height: 600px;">
+            <h1>Delayed or cancelled flight? Delayed or lost luggage?</h1>
+            <h2>Check your eligibility NOW</h2>
+            
+        </div>
     </body>
 </html>
