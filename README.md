@@ -37,6 +37,14 @@ A custom routing schedule has been implemented in `router.js` to support autodis
 ### Example
 Based on the HTTP request `GET http://localhost:3000/api/eu261/eligible-route/kl/ams/svo`.
 
+#### Values of the variables after the routing procedure 
+```javascript
+this.req.directory = 'api';
+this.req.controller = 'Eu261'; // Controller value after CamelCase() has been applied
+this.req.action = 'eligibleRoute'; // Action value after camelCase() has been applied
+this.req.params = ['kl', 'ams', 'svo'];
+```
+
 #### Results of the routing procedure
 The following controller file and action are parsed. As you can see, the router will add `Controller` to the value in `req.controller` and `Action` to the value in `req.action`.
 - The verb `GET` is allowed for this action by the value of `app.locals.verbs['_default']`.
@@ -44,13 +52,6 @@ The following controller file and action are parsed. As you can see, the router 
 - Controller file: `./controllers/api/Eu261Controller.js`
 - Action: `eligibleRouteAction()`
 
-#### Values of the variables in the controller after applying the routing procedure 
-```javascript
-this.req.directory = 'api';
-this.req.controller = 'Eu261'; // Controller value after CamelCase() has been applied
-this.req.action = 'eligibleRoute'; // Action value after camelCase() has been applied
-this.req.params = ['kl', 'ams', 'svo'];
-```
 
 ## MVC paradigm
 ### Model
