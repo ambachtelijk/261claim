@@ -43,7 +43,7 @@ A custom routing schedule has been implemented in `router.js` to support autodis
 
 
 #### Result
-The router will add `Controller` to the value in `req.controller` and `Action` to the value in `req.action`, thus *`./controllers/api/Eu261Controller.js` will be the controller file and `eligibleRouteAction()` the action*. 
+The router will add `Controller` to the value in `req.controller` and `Action` to the value in `req.action`, thus **`./controllers/api/Eu261Controller.js` will be the controller file and `eligibleRouteAction()` the action**. 
 ```
 // Set by configuration in ./configs/paths.js
 app.locals.paths.controllers = './controllers';
