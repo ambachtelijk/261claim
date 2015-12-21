@@ -46,9 +46,10 @@ Based on the HTTP request `GET http://localhost:3000/api/eu261/eligible-route/kl
 #### Values added to `req` after the routing procedure
 These variables will be available in the Controller class.
 ```javascript
+
 req.directory = 'api'; // The directory ./controllers/api exists and will be used
-req.controller = 'Eu261'; // Controller value after CamelCase() has been applied
-req.action = 'eligibleRoute'; // Action value after camelCase() has been applied
+req.controller = 'eu261'; // Value after CamelCase() will be Eu261 > file Eu261Controller.js will be loaded from ./controllers/api
+req.action = 'eligible-route'; // Value after camelCase() will be eligibleRoute > method eligibleRouteAction() will be run in the controller
 req.route = 'api/Eu261/eligibleRoute';
 req.params = ['kl', 'ams', 'svo'];
 ```
