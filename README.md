@@ -37,7 +37,7 @@ A custom routing schedule has been implemented in `router.js` to support autodis
 
 ### Example
 Based on the HTTP request: `GET http://localhost:3000/api/eu261/eligible-route/kl/ams/svo`
-In this example, the directory `./controllers/api` exists, but `./controllers/api/eu261` does not, so `Eu261Controller` will be the controller and next `eligibleRouteAction()` the action. The verb `GET` is allowed for this action.
+In this example, the directory `./controllers/api` exists, but `./controllers/api/eu261` does not, so `Eu261Controller` will be the controller and next `eligibleRouteAction()` the action. The verb `GET` is allowed for this action by the value of `app.locals.verbs['_default']`.
 
 #### Variables provided by Express: 
  ```
