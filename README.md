@@ -39,7 +39,7 @@ Based on the HTTP request `GET http://localhost:3000/api/eu261/eligible-route/kl
 
 #### Values of the variables after the routing procedure 
 ```javascript
-this.req.directory = 'api';
+this.req.directory = 'api'; // The directory ./controllers/api exists and will be used
 this.req.controller = 'Eu261'; // Controller value after CamelCase() has been applied
 this.req.action = 'eligibleRoute'; // Action value after camelCase() has been applied
 this.req.params = ['kl', 'ams', 'svo'];
