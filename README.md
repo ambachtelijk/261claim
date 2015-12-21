@@ -43,8 +43,8 @@ A custom routing schedule has been implemented in `router.js` to support autodis
 
 
 #### Result
-Controller file: `./controllers/api/Eu261Controller.js`
-Action: `eligibleRouteAction()`
+Controller file: `./controllers/api/Eu261Controller.js`.
+Action: `eligibleRouteAction()`.
 *Note: As you can see above, the router will add `Controller` to the value in `req.controller` and `Action` to the value in `req.action`.*
 ```
 // Set by configuration in ./configs/paths.js
