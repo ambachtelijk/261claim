@@ -35,7 +35,7 @@ In this example, the directory `./controllers/api` exists, but `./controllers/ap
 app.locals.paths.controllers = './controllers';
 req.path = '/api/eu261/eligible-route/kl/ams/svo';
 ````
-### Output:
+#### Output:
 ```
 req.directory = 'api';
 req.controller = 'Eu261'; // Controller value after CamelCase() has been applied
