@@ -40,7 +40,6 @@ Assumptions:
 - The verb `GET` is allowed for this action by the value of `app.locals.verbs['_default']`.
 - The directory `./controllers/api` exists, but `./controllers/api/eu261` does not, so `Eu261Controller` will be the controller and next `eligibleRouteAction()` the action. 
 
-
 #### Variables provided by Express: 
  ```
 app.locals.paths.controllers = './controllers';
@@ -57,3 +56,27 @@ req.params = ['kl', 'ams', 'svo'];
 // This will run the method Eu261Controller.eligibleRouteAction()
 require('./controllers/api/Eu261Controller').init({ req: req, res: res, next: next });
 ```
+
+## MVC paradigm
+### Model
+
+### View
+
+### Controller
+A base controller file has the following structure.
+```
+/**
+ * Route: http://localhost:3000/foo
+ * Filename: ./controllers/FooController.js
+ */
+
+var merge = require('merge');
+
+// Replace BaseController with any other abstract controller in the _abstract folder
+var BaseController = require('./_abstract/BaseController');
+
+module.exports = merge(Object.create(BaseController), {
+    indexAction: function() {}
+});
+```
+
