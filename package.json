@@ -11,10 +11,12 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "hjs": "~0.0.6",
-    "less-middleware": "1.0.x",
-    "morgan": "~1.6.1",
-    "mongoose": "*",
     "kerberos": "*",
+    "less-middleware": "1.0.x",
+    "merge": "*",
+    "morgan": "~1.6.1",
+    "node-mysql": "^0.4.2",
+    "sequelize": "^3.15.0",
     "serve-favicon": "~2.3.0"
   }
 }
