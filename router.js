@@ -25,13 +25,11 @@ Router.all('/*', function (req, res, next) {
     } while(path.length > 0);
     
     // Set path to index/index if on root
-    req.controller  = path[0] === undefined ? 'Index' : path.shift().CamelCase();
-    req.action      = path[0] === undefined ? 'index' : path.shift().camelCase();
+    req.controller  = path[0] === undefined ? 'index' : path.shift();
+    req.action      = path[0] === undefined ? 'index' : path.shift();
     req.route       = (req.directory + '/' + req.controller + '/' + req.action).trim2('/');
     req.params      = path;
     
-    
-    console.log(req.route);
     // Find the allowed HTTP verbs for this request
     var verbs = [];
     if(req.app.locals.verbs[req.route]) {
@@ -47,21 +45,23 @@ Router.all('/*', function (req, res, next) {
         throw new HttpError(405);
     }
     
-    var path = req.app.locals.paths.controllers + '/' + req.directory + '/' + req.controller + 'Controller';
+    var path = req.app.locals.paths.controllers + '/' + req.directory + '/' + req.controller.CamelCase() + 'Controller';
     
     // Try to include the Controller
     try {
         require.resolve(path);
     } catch(e) {
-        throw new HttpError(404, req.directory + '/' + req.controller + 'Controller Not Found');
+        throw new HttpError(404, req.directory + '/' + req.controller.CamelCase() + 'Controller Not Found');
     }
     
+    require(path)(req.app, req, res, next).init();
+    /*
     // Run the action
     require(path).init({
         res: res,
         req: req,
         next: next
-    });
+    });*/
 });
 
 module.exports = Router;
