@@ -67,17 +67,22 @@ The following controller file and action are parsed. As you can see, the router 
 A base controller file has the following structure.
 ```javascript
 /**
- * Route: http://localhost:3000/foo
- * Filename: ./controllers/FooController.js
+ * Route: http://localhost:3000/my
+ * Filename: ./controllers/MyController.js
  */
-
 var merge = require('merge');
 
 // Replace BaseController with any other abstract controller in the _abstract folder
 var BaseController = require('./_abstract/BaseController');
 
-module.exports = merge(Object.create(BaseController), {
-    indexAction: function() {}
-});
+module.exports = function(app, req, res, next) {
+    var parent = new BaseController(app, req, res, next);
+
+    return merge(Object.create(parent), {
+        indexAction: function() {
+            // Action logic goes here
+        }
+    });
+};
 ```
 
