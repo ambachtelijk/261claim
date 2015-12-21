@@ -35,7 +35,7 @@ A custom routing schedule has been implemented in `router.js` to support autodis
 6. Run the controller in `app.locals.paths.controllers + '/' + req.directory + '/' + req.controller.CamelCase() + 'Controller'` with action `req.action.camelCase() + 'Action'`. The controller is an object and must be an instance of `BaseController`. The controller object must contain the method with the name of the action (e.g. `indexAction: function() {}`). Throw a 404 error if the controller or action do not exist.
 
 ### Example
-Assumptions:
+#### Assumptions:
 - Based on the HTTP request: `GET http://localhost:3000/api/eu261/eligible-route/kl/ams/svo`.
 - The verb `GET` is allowed for this action by the value of `app.locals.verbs['_default']`.
 - The directory `./controllers/api` exists, but `./controllers/api/eu261` does not, so `Eu261Controller` will be the controller and next `eligibleRouteAction()` the action. 
