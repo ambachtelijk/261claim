@@ -28,6 +28,7 @@ A custom routing schedule has been implemented in `router.js` to support autodis
 3. Shift the first element from `req.path` and add the value to `req.action`. If `undefined`, default to `index`.
 4. Add the remaining elements from `path` to `req.params`.
 5. Run the controller in `app.locals.paths.controllers + '/' + req.directory + '/' + req.controller.CamelCase() + 'Controller'` with action `req.action.camelCase() + 'Action'`. The controller is an object and must be an instance of `BaseController`. The controller object must contain the method with the name of the action (e.g. `indexAction: function() {}`). Throw a 404 error if the controller or action do not exist.
+
 ### Example
 In this example, the directory `./controllers/api` exists, but `./controllers/api/eu261` does not, so `eu261` will be the controller and next `eligible-route` the action.
 
