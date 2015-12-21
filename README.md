@@ -35,25 +35,20 @@ A custom routing schedule has been implemented in `router.js` to support autodis
 6. Run the controller in `app.locals.paths.controllers + '/' + req.directory + '/' + req.controller.CamelCase() + 'Controller'` with action `req.action.camelCase() + 'Action'`. The controller is an object and must be an instance of `BaseController`. The controller object must contain the method with the name of the action (e.g. `indexAction: function() {}`). Throw a 404 error if the controller or action do not exist.
 
 ### Example
-#### Assumptions
-- Based on the HTTP request: `GET http://localhost:3000/api/eu261/eligible-route/kl/ams/svo`.
+**Based on the HTTP request `GET http://localhost:3000/api/eu261/eligible-route/kl/ams/svo`.**
+
+The following controller file and action are parsed. As you can see, the router will add `Controller` to the value in `req.controller` and `Action` to the value in `req.action`.
 - The verb `GET` is allowed for this action by the value of `app.locals.verbs['_default']`.
 - The directory `./controllers/api` exists, but `./controllers/api/eu261` does not.
-
-#### Result
-The following controller file and action are parsed. As you can see, the router will add `Controller` to the value in `req.controller` and `Action` to the value in `req.action`.
 - Controller file: `./controllers/api/Eu261Controller.js`
 - Action: `eligibleRouteAction()`
 
+#### Values of the variables in the controller after applying the routing procedure 
 ```javascript
-// Set by configuration in ./configs/paths.js
-app.locals.paths.controllers = './controllers';
-
-// Values of the variables in the app after applying the routing procedure on /api/eu261/eligible-route/kl/ams/svo
-req.directory = 'api';
-req.controller = 'Eu261'; // Controller value after CamelCase() has been applied
-req.action = 'eligibleRoute'; // Action value after camelCase() has been applied
-req.params = ['kl', 'ams', 'svo'];
+this.req.directory = 'api';
+this.req.controller = 'Eu261'; // Controller value after CamelCase() has been applied
+this.req.action = 'eligibleRoute'; // Action value after camelCase() has been applied
+this.req.params = ['kl', 'ams', 'svo'];
 ```
 
 ## MVC paradigm
