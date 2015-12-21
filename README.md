@@ -40,14 +40,12 @@ A custom routing schedule has been implemented in `router.js` to support autodis
 - The verb `GET` is allowed for this action by the value of `app.locals.verbs['_default']`.
 - The directory `./controllers/api` exists, but `./controllers/api/eu261` does not.
 
-
-
 #### Result
-*Note: As you can see, the router will add `Controller` to the value in `req.controller` and `Action` to the value in `req.action`.*
+The following controller file and action are parsed. As you can see, the router will add `Controller` to the value in `req.controller` and `Action` to the value in `req.action`.
 - Controller file: `./controllers/api/Eu261Controller.js`
 - Action: `eligibleRouteAction()`
 
-```
+```javascript
 // Set by configuration in ./configs/paths.js
 app.locals.paths.controllers = './controllers';
 
@@ -65,7 +63,7 @@ req.params = ['kl', 'ams', 'svo'];
 
 ### Controller
 A base controller file has the following structure.
-```
+```javascript
 /**
  * Route: http://localhost:3000/foo
  * Filename: ./controllers/FooController.js
