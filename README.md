@@ -1,6 +1,12 @@
 # 261claim.eu
 261claim.eu is a webbased app built on ExpressJS.
 
+## Table of contents
+[Dependencies](#dependencies)
+[Installation](#installation)
+[Routing](#routing)
+[MVC setup](#mvc-setup)
+
 ## Dependencies
 Make sure the following dependencies have been installed on the target machine and are accessible from the project folder. All the Node.js specific dependencies are defined by `package.json` and don't require separate installation.
 
@@ -52,7 +58,7 @@ The following controller file and action are parsed. As you can see, the router 
 - Controller file: `./controllers/api/Eu261Controller.js`
 - Action: `eligibleRouteAction()`
 
-## MVC paradigm
+## MVC setup
 ### Model
 
 ### View
