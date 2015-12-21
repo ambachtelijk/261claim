@@ -11,11 +11,10 @@
     "debug": "~2.2.0",
     "express": "~4.13.1",
     "hjs": "~0.0.6",
-    "kerberos": "*",
     "less-middleware": "1.0.x",
     "merge": "*",
     "morgan": "~1.6.1",
-    "node-mysql": "^0.4.2",
+    "mysql": "^2.10.0",
     "sequelize": "^3.15.0",
     "serve-favicon": "~2.3.0"
   }
