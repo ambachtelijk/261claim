@@ -1,9 +1,0 @@
-{
-    "username": "root",
-    "password": "raVVberg1987!",
-    "database": "261claim",
-    "options": {
-        "host": "localhost",
-        "dialect": "mysql"
-    }
-}
