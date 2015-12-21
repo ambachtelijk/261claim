@@ -20,6 +20,7 @@ Make sure to have NodeJS and NPM installed
  
 ## Routing
 A custom routing schedule has been implemented in `router.js` to support autodiscovery of valid routes. Typically, a route has the structure `/<directories>/<controller>/<action>/<params>`. It takes the request path and splits it. Next, the following logic is applied:
+
 1. Shift the first element from `req.path` and test if a directory with this value exists in `app.locals.paths.controllers` (this is the base directory for the controllers).
   1. If `true`, add the value to `req.directory`, apply step 1 with the next element in path.
   2. If `false`, continue to step 2.
