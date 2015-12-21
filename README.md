@@ -30,7 +30,7 @@ A custom routing schedule has been implemented in `router.js` to support autodis
 5. Run the controller in `app.locals.paths.controllers + '/' + req.directory + '/' + req.controller.CamelCase() + 'Controller'` with action `req.action.camelCase() + 'Action'`. The controller is an object and must be an instance of `BaseController`. The controller object must contain the method with the name of the action (e.g. `indexAction: function() {}`). Throw a 404 error if the controller or action do not exist.
 
 ### Example
-In this example, the directory `./controllers/api` exists, but `./controllers/api/eu261` does not, so `eu261` will be the controller and next `eligible-route` the action.
+In this example, the directory `./controllers/api` exists, but `./controllers/api/eu261` does not, so `eu261 > (object) Eu261Controller` will be the controller and next `eligible-route > eligibleRouteAction()` the action.
 
 #### Variables provided by Express: 
  ```
@@ -38,14 +38,13 @@ app.locals.paths.controllers = './controllers';
 req.path = '/api/eu261/eligible-route/kl/ams/svo';
 ````
 #### Output:
+The router will add `Controller` to the value in `req.controller` and `Action` to the value in `req.action`
 ```
 req.directory = 'api';
 req.controller = 'Eu261'; // Controller value after CamelCase() has been applied
 req.action = 'eligibleRoute'; // Action value after camelCase() has been applied
 req.params = ['kl', 'ams', 'svo'];
 
-/**
- * The router will add Controller to the value in req.controller and Action to the value in req.action
- */
+// This will run the method Eu261Controller.eligibleRouteAction()
 require('./controllers/api/Eu261Controller').init({ req: req, res: res, next: next });
 ```
