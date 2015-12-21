@@ -7,7 +7,7 @@
 3. [Routing](#routing)
 4. [MVC setup](#mvc-setup)
 
-## 1. Dependencies
+## Dependencies
 Make sure the following dependencies have been installed on the target machine and are accessible from the project folder. All the Node.js specific dependencies are defined by `package.json` and don't require separate installation.
 
 * Node.js
@@ -15,7 +15,7 @@ Make sure the following dependencies have been installed on the target machine a
 * MySQL server
 * Nodemon (optional)
 
-## 2. Installation
+## Installation
 
 1. Pull this project from GitHub.
 2. Run `npm install` in the project directory.
@@ -25,7 +25,7 @@ Make sure the following dependencies have been installed on the target machine a
 6. By default the app runs locally on port 3000. Go to `http://localhost:3000` in your web browser. Replace `localhost` with the IP address of your server, if the app has been installed remotely.
 7. Enjoy :).
  
-## 3. Routing
+## Routing
 A custom routing schema has been implemented in `router.js` to support autodiscovery of valid routes. Typically, a route has the structure `/<directories>/<controller>/<action>/<params>`. It takes the request path and splits it. Next, the following logic is applied:
 
 1. Shift the first element from `req.path` and test if a directory with this value exists in `app.locals.paths.controllers` (this is the base directory for the controllers).
@@ -58,7 +58,7 @@ The following controller file and action are parsed. As you can see, the router 
 - Controller file: `./controllers/api/Eu261Controller.js`
 - Action: `eligibleRouteAction()`
 
-## 4. MVC setup
+## MVC setup
 ### Model
 
 ### View
