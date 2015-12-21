@@ -1,7 +1,7 @@
 # 261claim.eu
 261claim.eu is a webbased app built on ExpressJS.
 
-## Table of contents
+### Table of contents
 1. [Dependencies](#dependencies)
 2. [Installation](#installation)
 3. [Routing](#routing)
