@@ -20,7 +20,7 @@ Make sure the following dependencies have been installed on the target machine a
 7. Enjoy :).
  
 ## Routing
-A custom routing schedule has been implemented in `router.js` to support autodiscovery of valid routes. Typically, a route has the structure `/<directories>/<controller>/<action>/<params>`. It takes the request path and splits it. Next, the following logic is applied:
+A custom routing schema has been implemented in `router.js` to support autodiscovery of valid routes. Typically, a route has the structure `/<directories>/<controller>/<action>/<params>`. It takes the request path and splits it. Next, the following logic is applied:
 
 1. Shift the first element from `req.path` and test if a directory with this value exists in `app.locals.paths.controllers` (this is the base directory for the controllers).
   1. If `true`, add the value to `req.directory`, apply step 1 with the next element in path.
@@ -47,11 +47,8 @@ this.req.params = ['kl', 'ams', 'svo'];
 
 #### Results of the routing procedure
 The following controller file and action are parsed. As you can see, the router will add `Controller` to the value in `req.controller` and `Action` to the value in `req.action`.
-- The verb `GET` is allowed for this action by the value of `app.locals.verbs['_default']`.
-- The directory `./controllers/api` exists, but `./controllers/api/eu261` does not.
 - Controller file: `./controllers/api/Eu261Controller.js`
 - Action: `eligibleRouteAction()`
-
 
 ## MVC paradigm
 ### Model
