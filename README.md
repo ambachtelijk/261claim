@@ -23,7 +23,7 @@ Make sure the following dependencies have been installed on the target machine a
 A custom routing schema has been implemented in `router.js` to support autodiscovery of valid routes. Typically, a route has the structure `/<directories>/<controller>/<action>/<params>`. It takes the request path and splits it. Next, the following logic is applied:
 
 1. Shift the first element from `req.path` and test if a directory with this value exists in `app.locals.paths.controllers` (this is the base directory for the controllers).
-  1. If `true`, add the value to `req.directory`, apply step 1 with the next element in path.
+  1. If `true`, add the value to `req.directory`, apply step 1 with the next element in `req.path`.
   2. If `false`, continue to step 2.
 2. Shift the first element from `req.path` and add the value to `req.controller`. If `undefined`, default to `index`.
 3. Shift the first element from `req.path` and add the value to `req.action`. If `undefined`, default to `index`.
