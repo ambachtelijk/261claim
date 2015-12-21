@@ -3,6 +3,7 @@
 
 ## Dependencies
 Make sure the following dependencies have been installed on the target machine and are accessible from the project folder.
+
 * Node.js
 * NPM (node package manager)
 * MySQL
@@ -10,6 +11,7 @@ Make sure the following dependencies have been installed on the target machine a
 
 ## Installation
 Make sure to have NodeJS and NPM installed
+
 1. Pull this project from GitHub
 2. Run `npm install` in the project directory
 3. Create a MySQL database and add the credentials in JSON format to `configs/db.json`
