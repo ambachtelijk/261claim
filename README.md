@@ -19,8 +19,8 @@ Make sure the following dependencies have been installed on the target machine a
 
 1. Pull this project from GitHub.
 2. Run `npm install` in the project directory.
-3. Create a MySQL database and add the credentials in JSON format to `configs/db.json`.
-4. Run `node mysql.install.js` (file is not yet included, so don't bother trying).
+3. Create a MySQL database and add the credentials in JSON format to `configs/db.json` (see `db.sample.json` for an example).
+4. Run `sql/schema.sql` and `sql/data.sql` on the database to create the table schemata and to import the app data.
 5. Run `nodemon bin/www` from the project directory.
 6. By default the app runs locally on port 3000. Go to `http://localhost:3000` in your web browser. Replace `localhost` with the IP address of your server, if the app has been installed remotely.
 7. Enjoy :).
