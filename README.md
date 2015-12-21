@@ -48,9 +48,9 @@ These variables will be available in the Controller class.
 ```javascript
 
 req.directory = 'api'; // The directory ./controllers/api exists and will be used
-req.controller = 'eu261'; // Value after CamelCase() will be Eu261 > file Eu261Controller.js will be loaded from ./controllers/api
-req.action = 'eligible-route'; // Value after camelCase() will be eligibleRoute > method eligibleRouteAction() will be run in the controller
-req.route = 'api/Eu261/eligibleRoute';
+req.controller = 'eu261'; // Value after CamelCase() will be Eu261
+req.action = 'eligible-route'; // Value after camelCase() will be eligibleRoute
+req.route = 'api/eu261/eligible-route';
 req.params = ['kl', 'ams', 'svo'];
 ```
 
