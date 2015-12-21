@@ -29,10 +29,15 @@ A custom routing schedule has been implemented in `router.js` to support autodis
 2. Shift the first element from `req.path` and add the value to `req.controller`. If `undefined`, default to `index`.
 3. Shift the first element from `req.path` and add the value to `req.action`. If `undefined`, default to `index`.
 4. Add the remaining elements from `path` to `req.params`.
-5. Run the controller in `app.locals.paths.controllers + '/' + req.directory + '/' + req.controller.CamelCase() + 'Controller'` with action `req.action.camelCase() + 'Action'`. The controller is an object and must be an instance of `BaseController`. The controller object must contain the method with the name of the action (e.g. `indexAction: function() {}`). Throw a 404 error if the controller or action do not exist.
+5. Determine if the request method is an allowed verb for this action. Search for a value in `app.locals.verbs` in the following order:
+  1. Take the value of the complete route as identified by the key `<req.directory>/<req.controller>/<req.action>`, if not defined,
+  2. Take the value of the action as identified by the key `<req.action>`, if not defined,
+  3. Take the default value as identified by the key `_default`
+6. Run the controller in `app.locals.paths.controllers + '/' + req.directory + '/' + req.controller.CamelCase() + 'Controller'` with action `req.action.camelCase() + 'Action'`. The controller is an object and must be an instance of `BaseController`. The controller object must contain the method with the name of the action (e.g. `indexAction: function() {}`). Throw a 404 error if the controller or action do not exist.
 
 ### Example
-In this example, the directory `./controllers/api` exists, but `./controllers/api/eu261` does not, so `eu261 > (object) Eu261Controller` will be the controller and next `eligible-route > eligibleRouteAction()` the action.
+Based on the HTTP request: `GET http://localhost:3000/api/eu261/eligible-route/kl/ams/svo`
+In this example, the directory `./controllers/api` exists, but `./controllers/api/eu261` does not, so `Eu261Controller` will be the controller and next `eligibleRouteAction()` the action. The verb `GET` is allowed for this action.
 
 #### Variables provided by Express: 
  ```
