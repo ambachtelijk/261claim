@@ -2,23 +2,22 @@
 261claim.eu is a webbased app built on ExpressJS.
 
 ## Dependencies
-Make sure the following dependencies have been installed on the target machine and are accessible from the project folder.
+Make sure the following dependencies have been installed on the target machine and are accessible from the project folder. All the Node.js specific dependencies are defined by `package.json` and don't require separate installation.
 
 * Node.js
 * NPM (node package manager)
-* MySQL
+* MySQL server
 * Nodemon (optional)
 
 ## Installation
-Make sure to have NodeJS and NPM installed
 
-1. Pull this project from GitHub
-2. Run `npm install` in the project directory
-3. Create a MySQL database and add the credentials in JSON format to `configs/db.json`
-4. Run `node mysql.install.js` (file is not yet included, so don't bother trying)
-5. Run `nodemon bin/www` from the project directory
-6. By default the app runs locally on port 3000. Go to `http://localhost:3000` in your web browser. Replace `localhost` with the IP address of your server, if the app has been installed remotely
-7. Enjoy :)
+1. Pull this project from GitHub.
+2. Run `npm install` in the project directory.
+3. Create a MySQL database and add the credentials in JSON format to `configs/db.json`.
+4. Run `node mysql.install.js` (file is not yet included, so don't bother trying).
+5. Run `nodemon bin/www` from the project directory.
+6. By default the app runs locally on port 3000. Go to `http://localhost:3000` in your web browser. Replace `localhost` with the IP address of your server, if the app has been installed remotely.
+7. Enjoy :).
  
 ## Routing
 A custom routing schedule has been implemented in `router.js` to support autodiscovery of valid routes. Typically, a route has the structure `/<directories>/<controller>/<action>/<params>`. It takes the request path and splits it. Next, the following logic is applied:
@@ -32,7 +31,7 @@ A custom routing schedule has been implemented in `router.js` to support autodis
 5. Determine if the request method is an allowed verb for this action. Search for a value in `app.locals.verbs` in the following order:
   1. Take the value of the complete route as identified by the key `<req.directory>/<req.controller>/<req.action>`, if not defined,
   2. Take the value of the action as identified by the key `<req.action>`, if not defined,
-  3. Take the default value as identified by the key `_default`
+  3. Take the default value as identified by the key `_default`.
 6. Run the controller in `app.locals.paths.controllers + '/' + req.directory + '/' + req.controller.CamelCase() + 'Controller'` with action `req.action.camelCase() + 'Action'`. The controller is an object and must be an instance of `BaseController`. The controller object must contain the method with the name of the action (e.g. `indexAction: function() {}`). Throw a 404 error if the controller or action do not exist.
 
 ### Example
