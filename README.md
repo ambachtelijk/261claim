@@ -37,7 +37,8 @@ A custom routing schema has been implemented in `router.js` to support autodisco
 ### Example
 Based on the HTTP request `GET http://localhost:3000/api/eu261/eligible-route/kl/ams/svo`.
 
-#### Values of the variables after the routing procedure 
+#### Values added to `req` after the routing procedure
+These variables will be available in the Controller class.
 ```javascript
 req.directory = 'api'; // The directory ./controllers/api exists and will be used
 req.controller = 'Eu261'; // Controller value after CamelCase() has been applied
