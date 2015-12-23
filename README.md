@@ -1,6 +1,15 @@
 # 261claim.eu
 261claim.eu is a webbased app built on ExpressJS.
 
+<<<<<<< HEAD
+=======
+### Table of contents
+1. [Dependencies](#dependencies)
+2. [Installation](#installation)
+3. [Routing](#routing)
+4. [MVC setup](#mvc-setup)
+
+>>>>>>> 82963a56938e89b385610930832f50fd871987e5
 ## Dependencies
 Make sure the following dependencies have been installed on the target machine and are accessible from the project folder. All the Node.js specific dependencies are defined by `package.json` and don't require separate installation.
 
@@ -20,10 +29,17 @@ Make sure the following dependencies have been installed on the target machine a
 7. Enjoy :).
  
 ## Routing
+<<<<<<< HEAD
 A custom routing schedule has been implemented in `router.js` to support autodiscovery of valid routes. Typically, a route has the structure `/<directories>/<controller>/<action>/<params>`. It takes the request path and splits it. Next, the following logic is applied:
 
 1. Shift the first element from `req.path` and test if a directory with this value exists in `app.locals.paths.controllers` (this is the base directory for the controllers).
   1. If `true`, add the value to `req.directory`, apply step 1 with the next element in path.
+=======
+A custom routing schema has been implemented in `router.js` to support autodiscovery of valid routes. Typically, a route has the structure `/<directories>/<controller>/<action>/<params>`. It takes the request path and splits it. Next, the following logic is applied:
+
+1. Shift the first element from `req.path` and test if a directory with this value exists in `app.locals.paths.controllers` (this is the base directory for the controllers).
+  1. If `true`, add the value to `req.directory`, apply step 1 with the next element in `req.path`.
+>>>>>>> 82963a56938e89b385610930832f50fd871987e5
   2. If `false`, continue to step 2.
 2. Shift the first element from `req.path` and add the value to `req.controller`. If `undefined`, default to `index`.
 3. Shift the first element from `req.path` and add the value to `req.action`. If `undefined`, default to `index`.
@@ -35,6 +51,7 @@ A custom routing schedule has been implemented in `router.js` to support autodis
 6. Run the controller in `app.locals.paths.controllers + '/' + req.directory + '/' + req.controller.CamelCase() + 'Controller'` with action `req.action.camelCase() + 'Action'`. The controller is an object and must be an instance of `BaseController`. The controller object must contain the method with the name of the action (e.g. `indexAction: function() {}`). Throw a 404 error if the controller or action do not exist.
 
 ### Example
+<<<<<<< HEAD
 #### Assumptions
 - Based on the HTTP request: `GET http://localhost:3000/api/eu261/eligible-route/kl/ams/svo`.
 - The verb `GET` is allowed for this action by the value of `app.locals.verbs['_default']`.
@@ -58,13 +75,37 @@ req.params = ['kl', 'ams', 'svo'];
 ```
 
 ## MVC paradigm
+=======
+Based on the HTTP request `GET http://localhost:3000/api/eu261/eligible-route/kl/ams/svo`.
+
+#### Values added to `req` after the routing procedure
+These variables will be available in the Controller class.
+```javascript
+req.directory = 'api'; // The directory ./controllers/api exists and will be used
+req.controller = 'Eu261'; // Controller value after CamelCase() has been applied
+req.action = 'eligibleRoute'; // Action value after camelCase() has been applied
+req.route = 'api/Eu261/eligibleRoute';
+req.params = ['kl', 'ams', 'svo'];
+```
+
+#### Results of the routing procedure
+The following controller file and action are parsed. As you can see, the router will add `Controller` to the value in `req.controller` and `Action` to the value in `req.action`.
+- Controller file: `./controllers/api/Eu261Controller.js`
+- Action: `eligibleRouteAction()`
+
+## MVC setup
+>>>>>>> 82963a56938e89b385610930832f50fd871987e5
 ### Model
 
 ### View
 
 ### Controller
 A base controller file has the following structure.
+<<<<<<< HEAD
 ```
+=======
+```javascript
+>>>>>>> 82963a56938e89b385610930832f50fd871987e5
 /**
  * Route: http://localhost:3000/foo
  * Filename: ./controllers/FooController.js

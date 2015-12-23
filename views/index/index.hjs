@@ -18,4 +18,21 @@
             <p style="font-size: 1.2em;text-align: justify;">We finish all the paperwork and file your claim directly to the airliner. You only pay a minor fee if your claim is granted, so <strong>no cure, no pay</strong>.</p>
         </div>
     </div>
+    <div class="row" id="claim-process">
+            <div class="col-md-4">
+                <div class="text-center"><span class="circle">1</span></div>
+                <h3 class="text-center">Establish your eligibility</h3>
+                <p style="font-size: 1.2em; text-align: justify;">We examine whether your itinerary is subjected to <strong>compensation regulations</strong> for air travel (like EC 261/2004 and the Montreal Convention).</p>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center"><span class="circle">2</span></div>
+                <h3 class="text-center">Calculate your compensation</h3>
+                <p style="font-size: 1.2em;text-align: justify;">We use your itinerary to calculate the reimbursement applicable to your situation. This will be displayed in an <strong>easy-to-read overview</strong>.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center"><span class="circle">3</span></div>
+                <h3 class="text-center">File your claim</h3>
+                <p style="font-size: 1.2em;text-align: justify;">We finish all the paperwork and file your claim directly to the airliner. You only pay a minor fee if your claim is granted, so <strong>no cure, no pay</strong>.</p>
+            </div>
+    </div>
 </section>
