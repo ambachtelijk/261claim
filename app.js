@@ -1,52 +1,81 @@
-var php = require('./php'); 
-var fs = require('fs');
-var path = require('path');
-var favicon = require('serve-favicon');
-var less = require('less-middleware');
-var logger = require('morgan');
-//var mysql = require('mysql');
+"use strict"
+var Fs = require('fs');
+var Path = require('path');
+var Favicon = require('serve-favicon');
+var Less = require('less-middleware');
+var Logger = require('morgan');
 var Sequelize = require('sequelize');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-
+var CookieParser = require('cookie-parser');
+var BodyParser = require('body-parser');
 
 // Load Express.js and create an instance of the app
-var express = require('express');
-var app = express();
+var Express = require('express');
 
+// App app to the global scope
+GLOBAL.app = Express();
+
+// Make the base directory of this app globally available
+app.basedir = __dirname;
+app.config = {};
 
 // Load all config files
-fs.readdirSync('./configs').forEach(function(filename) {
-    if(~filename.indexOf('.json')) {
-        app.locals[filename.slice(0, filename.indexOf('.json'))] = require('./configs/' + filename);
+Fs.readdirSync(Path.join(app.basedir, 'config')).forEach(function(filename) {
+    if(~filename.indexOf('.json') && !~filename.indexOf('.sample')) {
+        app.config[filename.slice(0, filename.indexOf('.json'))] = require(Path.join(app.basedir, 'config', filename));
     }
+});
+
+// Add additional JS features
+require(Path.join(app.basedir, 'php'));
+
+// Preload all abstract controllers
+// Each controller has to be loaded in the right order, to prevent fatal exceptions
+// because deratives try to extend a class that has not yet been included
+app.config.path.controller.abstract.order.forEach(function(level) {
+    let suffix = app.config.path.controller.suffix;
+
+    level.forEach(function(controller) {
+        let filename = Path.join(
+            app.basedir, 
+            app.config.path.controller.abstract.location, controller.CamelCase() + suffix
+        );
+
+        // Add controller to the global scope
+        GLOBAL[controller.CamelCase() + suffix.slice(0, suffix.indexOf('.js'))] = require(filename);
+    });
 });
 
 
 // Connect to database
-var db = new Sequelize(app.locals.db.database, app.locals.db.username, app.locals.db.password, app.locals.db.options);
-app.use(function(req, res, next) {
-    req.db = db;
-    next();
-});
+if(app.config.db) {
+    app.use(function(req, res, next) {
+        req.db = new Sequelize(
+            app.config.db.database, 
+            app.config.db.username, 
+            app.config.db.password, 
+            app.config.db.options
+        );
+
+        next();
+    });
+}
 
 // Set up view renderer
 app.locals.delimiters = '[[ ]]'; // Change Hogan delimiters to avoid conflicts with Angular
-app.set('views', app.locals.paths.views);
+
+app.set('views', app.config.path.view || 'view');
 app.set('view engine', 'hjs');
 
-
 // Front end interaction
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(less(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public')));
-
+//app.use(Favicon(Path.join(__dirname, 'public', 'favicon.ico')));app.use(logger('dev'));
+app.use(BodyParser.json());
+app.use(BodyParser.urlencoded({ extended: false }));
+app.use(CookieParser());
+app.use(Less(Path.join(app.basedir, app.config.path.public || 'public')));
+app.use(Express.static(Path.join(app.basedir, app.config.path.public || 'public')));
 
 // This is where the magic happens: route the request
-app.use(require('./router'));
+app.use(require(Path.join(app.basedir, 'router')));
 
 // Catch errors
 app.use(function(error, req, res, next) {
