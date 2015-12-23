@@ -1,11 +1,15 @@
 var merge = require('merge');
 var BaseController = require('../_abstract/BaseController');
 
-module.exports = merge(Object.create(BaseController), {
-    before: function() {
-        this.res.data = {};
-    },
-    after: function() {
-        this.res.json(this.res.data);
-    }
-});
+module.exports = function(app, req, res, next) {
+    var parent = new BaseController(app, req, res, next);
+
+    return merge(Object.create(parent), {
+        before: function() {
+            res.data = {};
+        },
+        after: function() {
+            res.json(res.data);
+        }
+    });
+};

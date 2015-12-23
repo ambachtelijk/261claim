@@ -22,8 +22,8 @@ Make sure the following dependencies have been installed on the target machine a
 
 1. Pull this project from GitHub.
 2. Run `npm install` in the project directory.
-3. Create a MySQL database and add the credentials in JSON format to `configs/db.json`.
-4. Run `node mysql.install.js` (file is not yet included, so don't bother trying).
+3. Create a MySQL database and add the credentials in JSON format to `configs/db.json` (see `db.sample.json` for an example).
+4. Run `sql/schema.sql` and `sql/data.sql` on the database to create the table schemata and to import the app data.
 5. Run `nodemon bin/www` from the project directory.
 6. By default the app runs locally on port 3000. Go to `http://localhost:3000` in your web browser. Replace `localhost` with the IP address of your server, if the app has been installed remotely.
 7. Enjoy :).
@@ -81,10 +81,11 @@ Based on the HTTP request `GET http://localhost:3000/api/eu261/eligible-route/kl
 #### Values added to `req` after the routing procedure
 These variables will be available in the Controller class.
 ```javascript
+
 req.directory = 'api'; // The directory ./controllers/api exists and will be used
-req.controller = 'Eu261'; // Controller value after CamelCase() has been applied
-req.action = 'eligibleRoute'; // Action value after camelCase() has been applied
-req.route = 'api/Eu261/eligibleRoute';
+req.controller = 'eu261'; // Value after CamelCase() will be Eu261
+req.action = 'eligible-route'; // Value after camelCase() will be eligibleRoute
+req.route = 'api/eu261/eligible-route';
 req.params = ['kl', 'ams', 'svo'];
 ```
 
@@ -107,17 +108,22 @@ A base controller file has the following structure.
 ```javascript
 >>>>>>> 82963a56938e89b385610930832f50fd871987e5
 /**
- * Route: http://localhost:3000/foo
- * Filename: ./controllers/FooController.js
+ * Route: http://localhost:3000/my
+ * Filename: ./controllers/MyController.js
  */
-
 var merge = require('merge');
 
 // Replace BaseController with any other abstract controller in the _abstract folder
 var BaseController = require('./_abstract/BaseController');
 
-module.exports = merge(Object.create(BaseController), {
-    indexAction: function() {}
-});
+module.exports = function(app, req, res, next) {
+    var parent = new BaseController(app, req, res, next);
+
+    return merge(Object.create(parent), {
+        indexAction: function() {
+            // Action logic goes here
+        }
+    });
+};
 ```
 
