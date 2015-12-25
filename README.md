@@ -15,15 +15,20 @@ Make sure the following dependencies have been installed on the target machine a
 
 * Node.js
 * NPM (node package manager)
-* MySQL server
+* Database server (e.g. MongoDB or MySQL)
 * Nodemon (optional)
 
 ## Installation
 
 1. Pull this project from GitHub.
 2. Run `npm install` in the project directory.
+<<<<<<< HEAD
 3. Create a MySQL database and add the credentials in JSON format to `configs/db.json` (see `db.sample.json` for an example).
 4. Run `sql/schema.sql` and `sql/data.sql` on the database to create the table schemata and to import the app data.
+=======
+3. Create a MySQL database and add the credentials in JSON format to `configs/db.json`.
+4. Import the database schema and data SQL files in `/sql/` on your MySQL server.
+>>>>>>> a22fba615a07502d3fbf6d66c33bbf64531b1521
 5. Run `nodemon bin/www` from the project directory.
 6. By default the app runs locally on port 3000. Go to `http://localhost:3000` in your web browser. Replace `localhost` with the IP address of your server, if the app has been installed remotely.
 7. Enjoy :).
@@ -101,6 +106,7 @@ The following controller file and action are parsed. As you can see, the router 
 ### View
 
 ### Controller
+<<<<<<< HEAD
 A base controller file has the following structure.
 <<<<<<< HEAD
 ```
@@ -125,5 +131,14 @@ module.exports = function(app, req, res, next) {
         }
     });
 };
+=======
+A controller file has the following structure. Replace `BaseController` with any controller name in the `controller/_abstract` directory. This directory is automatically included during the bootstrap in `app.js`, so there is no need to explicitly require it in the controller.
+```javascript
+module.exports = BaseController.extend({
+    indexAction: function(next) {
+        next();
+    }
+});
+>>>>>>> a22fba615a07502d3fbf6d66c33bbf64531b1521
 ```
 

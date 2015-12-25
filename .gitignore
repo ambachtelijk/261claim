@@ -23,9 +23,10 @@ coverage
 build/Release
 
 # Dependency directory
-# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
+# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
 node_modules
 
+<<<<<<< HEAD
 # Debug log from npm
 npm-debug.log
 <<<<<<< HEAD
@@ -35,3 +36,9 @@ nbproject
 
 configs/db.json
 >>>>>>> 82963a56938e89b385610930832f50fd871987e5
+=======
+nbproject
+
+config/*
+!config/*.sample.json
+>>>>>>> a22fba615a07502d3fbf6d66c33bbf64531b1521

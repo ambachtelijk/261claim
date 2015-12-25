@@ -1,43 +1,63 @@
-var express = require('express');
-var fs = require('fs');
+var Express = require('express');
+var Fs = require('fs');
+var Path = require('path');
 var HttpError = require('http-errors');
-var Router = express.Router();
+var Router = Express.Router();
 
 /**
  * Implement convention over configuration (CoC) paradigm for basic routing and MVC support
  * Should be in any framework by default
  */
-Router.all('/*', function (req, res, next) {
-    // Protection against URL injection by only allowing certain characters
-    var path = req.path.replace(/[^\w-\/]/g,'').toLowerCase().trim2('/').split('/');
-    // Traverse directories in URL
-    req.directory = "";
-    do {
-        if(path[0]) {
-            try {
-                fs.statSync(req.app.locals.paths.controllers + '/' + req.directory + '/' + path[0]);
-                req.directory += "/" + path[0];
-            } catch(e) {
-                break;
-            };
-        }
-        path.shift();
-    } while(path.length > 0);
+module.exports = Router.all('/*', function (req, res, next) {
+    var basedir = app.config.path.controller.basedir;
+    var suffix = app.config.path.controller.suffix;
     
-    // Set path to index/index if on root
-    req.controller  = path[0] === undefined ? 'index' : path.shift();
-    req.action      = path[0] === undefined ? 'index' : path.shift();
-    req.route       = (req.directory + '/' + req.controller + '/' + req.action).trim2('/');
-    req.params      = path;
+    // Protection against URL injection by only allowing certain characters
+    var route = path = req.path.replace(/[^\w-\/]/g,'').toLowerCase().trim2('/');
+    
+    while(path !== "") {
+        // If there is no / in the remaining path, directory will be empty and controller will be path
+        if(path.indexOf('/') === -1) {
+            req.directory = '';
+            req.controller = path;
+
+        // Take the last / from path as divider between directory and controller 
+        } else {
+            req.directory = path.slice(0, path.lastIndexOf('/'));
+            req.controller = path.slice(path.lastIndexOf('/') + 1);
+        }
+
+        try {
+            if(Fs.statSync(Path.join(app.basedir, basedir, req.directory, req.controller.CamelCase() + suffix)).isFile()) {
+                break;
+            }
+        } catch(e) {}
+        path = req.directory;
+    };
+    
+    // Set default values for directory and controller
+    req.directory = req.directory || '';
+    req.controller = req.controller || app.config.path.controller.name;
+    
+    // Get the remaining path: first element is the action
+    req.action = path.length !== route.length 
+        ? route.slice(path.length + 1).split('/').shift()
+        : app.config.path.controller.action || 'index';
+
+    // Set the route
+    req.route = Path.join(req.directory, req.controller, req.action); 
+    
+    // Take the original unfiltered request and cut off the URI elements that belong to the route
+    req.params = req.path.trim2('/').split('/').splice(req.route.split('/').length);
     
     // Find the allowed HTTP verbs for this request
     var verbs = [];
-    if(req.app.locals.verbs[req.route]) {
-        verbs = req.app.locals.verbs[req.route];
-    } else if(req.app.locals.verbs[req.action]) {
-        verbs = req.app.locals.verbs[req.action];
+    if(app.config.verb && app.config.verb[req.route]) {
+        verbs = app.config.verb[req.route];
+    } else if(app.config.verb[req.action]) {
+        verbs = app.config.verb[req.action];
     } else {
-        verbs = req.app.locals.verbs['_default'];
+        verbs = app.config.verb['_default'];
     }
 
     // Throw Method Not Allowed if unsupported verb
@@ -45,23 +65,30 @@ Router.all('/*', function (req, res, next) {
         throw new HttpError(405);
     }
     
-    var path = req.app.locals.paths.controllers + '/' + req.directory + '/' + req.controller.CamelCase() + 'Controller';
-    
     // Try to include the Controller
     try {
-        require.resolve(path);
-    } catch(e) {
-        throw new HttpError(404, req.directory + '/' + req.controller.CamelCase() + 'Controller Not Found');
+        var Controller = require(Path.join(app.basedir, basedir, req.directory, req.controller.CamelCase() + suffix));
+    } catch(error) {
+        console.log(error); // Sometimes we're dealing with a syntax error, but that is none of the front end's business
+        throw new HttpError(404, Path.join(req.directory, req.controller.CamelCase() + suffix) + ' Not Found');
     }
     
-    require(path)(req.app, req, res, next).init();
-    /*
-    // Run the action
-    require(path).init({
-        res: res,
-        req: req,
-        next: next
-    });*/
-});
+    if(typeof Controller !== 'function') {
+        throw new HttpError(500, 'No valid controller found in ' + Path.join(req.directory, req.controller.CamelCase() + suffix));
+    }
+    
+    // Bind the arguments to this object
+    var controller = new Controller({ req: req, res: res, next: next });
 
-module.exports = Router;
+    if(!(controller instanceof BaseController)
+    ) {
+        throw new HttpError(500, req.controller.CamelCase() + suffix + ' does not inherit from Base' + suffix);
+    }
+    
+    if(typeof controller[req.action.camelCase() + 'Action'] !== 'function') {
+        throw new HttpError(404, req.action.camelCase() + 'Action Not Found');
+    }
+
+    // Dispatch the route
+    controller.run(req.action);
+});

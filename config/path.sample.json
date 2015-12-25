@@ -1,0 +1,12 @@
+{
+    "controller": {
+        "basedir": "controller",
+        "suffix": "Controller.js",
+        "name": "index",
+        "action": "index",
+        "abstract": "controller/_abstract"
+    },
+    "method": "method",
+    "view": "view",
+    "public": "public"
+}
