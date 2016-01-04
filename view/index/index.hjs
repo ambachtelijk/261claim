@@ -35,15 +35,15 @@
                 <img id="img_step3" src="/images/step3.png" />
             </div>
     </div>
-    <div class="row" id="user-steps" style="margin-top:5%;">
+    <div class="row" id="short-titles" style="margin-top:5%;">
             <div class="col-md-4">
-                <h3 class="text-center">Easy and fast calculation of compensation.</h3>
+                <h3 class="text-center"><strong>Easy and fast calculation of compensation.</strong></h3>
             </div>
             <div class="col-md-4">
-                <h3 class="text-center">No knowledge needed.<br />No hussle.</h3>
+                <h3 class="text-center"><strong>No knowledge needed.<br />No hussle.</strong></h3>
             </div>
             <div class="col-md-4">
-                <h3 class="text-center">Reliable and effective personalized service.</h3>
+                <h3 class="text-center"><strong>Reliable and effective personalized service.</strong></h3>
             </div>
     </div>
 </section>
