@@ -26,4 +26,19 @@
             Delayed laggage? <input type="radio">
         </div>
     </div>
+    <div class="row" id="flight-info">
+        <div class="col-md-10 col-sm-offset-2 col-md-offset-2">
+            Flight: ................
+            From: ......
+            To: .........
+            Canceled on: .............
+            Reason:..........
+            Additional info:.........
+        </div>
+    </div>
+    <div class="row" id="check-info">
+        <div class="col-md-10 col-sm-offset-2 col-md-offset-2 alert alert-success">
+            <span class="glyphicon-ok" > </span> Elligible for compensation!
+        </div>
+    </div>
 </section>
