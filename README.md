@@ -13,19 +13,30 @@ Make sure the following dependencies have been installed on the target machine a
 
 * Node.js
 * NPM (node package manager)
-* Database server (e.g. MongoDB or MySQL)
+* MySQL server
 * Nodemon (optional)
 
 ## Installation
 
 1. Pull this project from GitHub.
 2. Run `npm install` in the project directory.
-3. Create a MySQL database and add the credentials in JSON format to `configs/db.json`.
-4. Run `node mysql.install.js` (file is not yet included, so don't bother trying).
+3. Create a MySQL database and import the files `sql/schema.sql` and `sql/data.sql`.
+4. Set the [environment variables](#environment-variables) for inclusion on runtime according to one of below methods. Make sure all variables are included in your selected method
+ * Create a file named `environment.js` in the same directory as `app.js` exists. The syntax is `process.env.<VARIABLE> = '<value>';`, e.g. `process.env.DB_HOST = 'localhost';`.
+ * In Heroku you set these variables on application instance level with the `Config Variables` in the settings panel of your app.
+ * As environment variable of your operating system (not recommended) 
 5. Run `nodemon bin/www` from the project directory.
 6. By default the app runs locally on port 3000. Go to `http://localhost:3000` in your web browser. Replace `localhost` with the IP address of your server, if the app has been installed remotely.
 7. Enjoy :).
- 
+
+### Environment variables
+All of the following environment variables are required to run the application properly:
+
+* `DB_HOST` contains the MySQL hostname of the application. Typically its value is `localhost`
+* `DB_DATABASE` the MySQL database on which the application will run
+* `DB_USERNAME` the MySQL username that has full priviliges on the database set in `DB_DATABASE`
+* `DB_PASSWORD` the password that belongs to the username set in `DB_USERNAME`
+
 ## Routing
 A custom routing schema has been implemented in `router.js` to support autodiscovery of valid routes. Typically, a route has the structure `/<directories>/<controller>/<action>/<params>`. It takes the request path and splits it. Next, the following logic is applied:
 
