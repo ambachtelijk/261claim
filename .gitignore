@@ -33,9 +33,6 @@ npm-debug.log
 
 nbproject
 
-config/*
-!config/*.sample.json
-
 .idea
 
 sql/csv
