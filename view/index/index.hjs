@@ -17,32 +17,4 @@
             <p style="font-size: 1.2em;text-align: justify;">We finish all the paperwork and file your claim directly to the airliner. You only pay a minor fee if your claim is granted, so <strong>no cure, no pay</strong>.</p>
         </div>
     </div>
-    <div class="row" id="user-steps" style="margin-top:5%;">
-            <div class="col-md-4">
-                <h3 class="text-center">Step 1: Input your details</h3>
-                <p style="font-size: 1.2em; text-align: justify;">Input your flight number and date in the boxes above:</p>
-                <img id="img_step1" src="/images/step1.png" />
-            </div>
-            <div class="col-md-4">
-                <h3 class="text-center">Step 2: Calculate your refund</h3>
-                <p style="font-size: 1.2em;text-align: justify;">Check your details and complete the necessary information:</p>
-                <img id="img_step2" src="/images/step2.png" />
-            </div>
-            <div class="col-md-4">
-                <h3 class="text-center">Step 3: File your claim</h3>
-                <p style="font-size: 1.2em;text-align: justify;">File your claim:</p>
-                <img id="img_step3" src="/images/step3.png" />
-            </div>
-    </div>
-    <div class="row" id="short-titles" style="margin-top:5%;">
-            <div class="col-md-4">
-                <h3 class="text-center"><strong>Easy and fast calculation of compensation.</strong></h3>
-            </div>
-            <div class="col-md-4">
-                <h3 class="text-center"><strong>No knowledge needed.<br />No hussle.</strong></h3>
-            </div>
-            <div class="col-md-4">
-                <h3 class="text-center"><strong>Reliable and effective personalized service.</strong></h3>
-            </div>
-    </div>
 </section>

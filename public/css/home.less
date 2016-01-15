@@ -1,25 +1,7 @@
-@main-color: #5b5b8c;
-@bg-color: #dfdfff;
-@screen-sm-min: 768px;
-
-a, .btn-link {
-    color: @main-color;
-    &:hover {
-        color: darken(@main-color, 50%);
-        text-decoration: none;
-    }
-}
-body {
-    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
-}
-
-.main-section {
-    padding-top: 4em;
-    padding-bottom: 4em;
-}
+@import "variables";
 
 .header {
-    background: url(/images/terminal-airport.jpg) no-repeat center center; 
+    background: url(/media/terminal-airport.jpg) no-repeat center center; 
     background-size: cover; 
     
     .box {
@@ -80,56 +62,4 @@ body {
     button {
         margin-top: 1em;
     }
-}
-
-.circle {
-    background: @main-color;
-    display: inline-block;
-    color: white;
-    font-size: 48px;
-    line-height: 1.5em;
-    width: 1.5em;
-    height: 1.5em;
-    border-radius: .75em;
-}
-
-h1, h2, h3 {
-    color: @main-color;
-}
-
-#img_step1 {
-    display: inline-block;
-    width: 100%;
-}
-
-#img_step2 {
-    display: inline-block;
-    width: 100%;
-}
-
-#img_step3 {
-    display: inline-block;
-    width: 100%;
-}
-
-#check-info {
-    radius: 2%;
-    width: 100%;
-}
-
-#flight-info {
-    radius: 2%;
-    width: 100%;
-}
-
-nav a.navbar-brand img {
-    display: inline-block;
-    width: 100%;
-    margin: 0;
-
-}
-nav a.navbar-brand {
-    display: inline-block;
-    width: 100%;
-    padding: 0;
 }
