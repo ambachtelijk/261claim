@@ -1,29 +1,25 @@
-@import "variables";
-
 .header {
     background: url(/media/terminal-airport.jpg) no-repeat center center; 
     background-size: cover; 
     
     .box {
-        border-radius: .5em;
-        box-shadow: 0px 0px 20px fade(@main-color, 100%);
-        padding: .5em;
-        background: fade(@bg-color,25%);
+        border-radius: @border-radius-large;
+        box-shadow: 0px 0px 20px fade(@brand-primary, 100%);
+        padding: @padding-xs-horizontal;
+        background: fade(@bg-color-light,25%);
     }
     
     .inner-box {
-        border-radius: .4em;
+        border-radius: @border-radius-base;
         overflow: hidden;
     }
     
     h1 {
-        margin: 0 .5em 1em;
-        text-shadow: 2px 2px 0px darken(@main-color, 25%), -1px -1px 0px darken(@main-color, 25%);
-        line-height: 1.2em;
-        
-        font-size: 48px;
-        @media (max-width: @screen-sm-min) {
-            font-size: 36px;
+        text-shadow: 2px 2px 0px darken(@brand-primary, 25%), -1px -1px 0px darken(@brand-primary, 25%);
+        margin: 0 0 1em 0;
+        font-size: 36px;
+        @media (min-width: @screen-sm-min) {
+            font-size: 48px;
         }
         font-weight: bold;
         small {
@@ -33,21 +29,21 @@
     }
     
     hr {
-        margin: 0 0 15px 0;
+        margin: 0 0 @form-group-margin-bottom 0;
         border-color: white;
     }
 
     .title {
-        color: white;
-        background: fade(@main-color,75%);
+        color: @component-active-color;
+        background: fade(@component-active-bg, 75%);
     }
     
     .content {
-        background: fade(@bg-color,50%);
+        background: fade(@bg-color-light, 75%);
     }
     
     .title, .content {
-        padding: 1em;
+        padding: @grid-gutter-width / 2;
     }
     
     h1, h2 {

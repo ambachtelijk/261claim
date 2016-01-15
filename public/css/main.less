@@ -1,26 +1,45 @@
-@import "variables";
-
-a, .btn-link {
-    color: @main-color;
-    &:hover {
-        color: darken(@main-color, 50%);
-        text-decoration: none;
+.main-section {
+    
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+    @media (min-width: @screen-sm-min) {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+    
+    > h1:first-child, > .row > .col > h1:first-child {
+        margin-top: 0;
     }
 }
-body {
-    font-family: 'Open Sans', Helvetica, Arial, sans-serif;
+
+body > .navbar + .main-section {
+    padding-top: @navbar-height + 30px;
+    
+    @media (min-width: @screen-sm-min) {
+        padding-top: @navbar-height + 60px;
+    }
 }
 
-.main-section {
-    padding-top: 4em;
-    padding-bottom: 4em;
+nav a.navbar-brand img {
+    display: inline-block;
+    max-height: 100%;
+    margin: 0;
+
+}
+nav a.navbar-brand {
+    display: inline-block;
+    padding: 0;
 }
 
+nav div.navbar-btn {
+    padding: 0 @navbar-padding-horizontal / 2;
+}
 
 .circle {
-    background: @main-color;
+    background: @component-active-bg;
     display: inline-block;
-    color: white;
+    color: @component-active-color;
     font-size: 48px;
     line-height: 1.5em;
     width: 1.5em;
@@ -28,18 +47,21 @@ body {
     border-radius: .75em;
 }
 
-h1, h2, h3 {
-    color: @main-color;
-}
-
-nav a.navbar-brand img {
-    display: inline-block;
-    width: 100%;
-    margin: 0;
-
-}
-nav a.navbar-brand {
-    display: inline-block;
-    width: 100%;
-    padding: 0;
+.footer {
+    background: @brand-primary;
+    color: white;
+    
+    a:hover, h4 {
+        color: @bg-color;
+    }
+    
+    a {
+        color: white;
+    }
+    
+    .copyright {
+        margin-top: 20px;
+        font-size: .8em;
+        color: @bg-color;
+    }
 }

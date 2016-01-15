@@ -1,3 +1,23 @@
-@main-color: #5b5b8c;
-@bg-color: #dfdfff;
-@screen-sm-min: 768px;
+@brand-primary:                     #5b5b8c;
+@bg-color:                          #dfdfff;
+@bg-color-light:                    tint(@bg-color, 75%);
+
+@link-hover-color:                  darken(@brand-primary, 40%);
+@link-hover-decoration:             none;
+@font-family-sans-serif:            'Open Sans', Helvetica, Arial, sans-serif;
+@headings-color:                    @brand-primary;
+
+@component-active-bg:               @brand-primary;
+@component-active-color:            white;
+
+@grid-float-breakpoint:             @screen-xs-min;
+@navbar-default-bg:                 fade(@bg-color-light, 95%);
+@navbar-default-link-active-bg:     @component-active-bg;
+@navbar-default-border:             @brand-primary;
+@navbar-default-link-color:         @link-color;
+@navbar-default-link-active-color:  @component-active-color;
+@navbar-default-link-hover-color:   @link-hover-color;
+
+@navbar-default-toggle-border-color:transparent;
+@navbar-default-toggle-hover-bg:    transparent;
+@navbar-default-toggle-icon-bar-bg: transparent;
