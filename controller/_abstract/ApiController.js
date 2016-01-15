@@ -1,11 +1,28 @@
 "use strict"
+var HttpError = require('http-errors');
+
 module.exports = BaseController.extend({
     before: function(next) {
-        res.data = {};
+        this.res.type('json');
+        this.res.data = {};
         next();
     },
-    after: function(next) {
-        res.json(res.data);
+    after: function(next, error) {
+        // Everything went just fine
+        if(error === undefined) {
+            var error = new HttpError(200);
+        }
+        
+        this.res.status(error.status);
+        this.res.json({
+            status: error.status,
+            message: error.message,
+            stack: app.get('env') === 'development' ? error.stack.split("\n") : null,
+            data: this.res.data
+        });
         next();
+    },
+    errorHandler: function(next, error) {
+        this.after(next, error);
     }
 });

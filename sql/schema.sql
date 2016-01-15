@@ -16,37 +16,37 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `airlines`
+-- Table structure for table `airline`
 --
 
-DROP TABLE IF EXISTS `airlines`;
+DROP TABLE IF EXISTS `airline`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `airlines` (
+CREATE TABLE `airline` (
   `iata` char(2) NOT NULL,
   `icao` char(3) NOT NULL,
-  `airline` varchar(32) NOT NULL,
+  `name` varchar(32) NOT NULL,
   `callsign` varchar(32) NOT NULL,
   `country` char(2) DEFAULT NULL,
   `comments` varchar(255) NOT NULL,
   `active` tinyint(1) NOT NULL,
   KEY `iata` (`iata`),
-  KEY `airline` (`airline`),
+  KEY `airline` (`name`),
   KEY `active` (`active`),
   KEY `icao` (`icao`),
   KEY `country` (`country`),
-  CONSTRAINT `airlines_ibfk_1` FOREIGN KEY (`country`) REFERENCES `countries` (`alpha2`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `airline_ibfk_1` FOREIGN KEY (`country`) REFERENCES `country` (`alpha2`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `airports`
+-- Table structure for table `airport`
 --
 
-DROP TABLE IF EXISTS `airports`;
+DROP TABLE IF EXISTS `airport`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `airports` (
+CREATE TABLE `airport` (
   `iata` char(3) NOT NULL,
   `name` varchar(64) NOT NULL,
   `city` varchar(64) NOT NULL,
@@ -58,18 +58,18 @@ CREATE TABLE `airports` (
   KEY `name` (`name`),
   KEY `city` (`city`),
   KEY `country` (`country`),
-  CONSTRAINT `airports_ibfk_1` FOREIGN KEY (`country`) REFERENCES `countries` (`alpha2`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `airport_ibfk_1` FOREIGN KEY (`country`) REFERENCES `country` (`alpha2`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `countries`
+-- Table structure for table `country`
 --
 
-DROP TABLE IF EXISTS `countries`;
+DROP TABLE IF EXISTS `country`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `countries` (
+CREATE TABLE `country` (
   `id` smallint(5) unsigned NOT NULL,
   `alpha2` char(2) NOT NULL,
   `alpha3` char(3) NOT NULL,
@@ -93,4 +93,4 @@ CREATE TABLE `countries` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-21 22:58:49
+-- Dump completed on 2016-01-15 12:30:58

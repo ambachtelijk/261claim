@@ -3,9 +3,9 @@ module.exports = WebController.extend({
     indexAction: function(next) {
         this.view.params = {
             title: 'Cancelled or delayed flight? File your claim now',
-            currentTitle: 'Foo',
-            partials: ['header']
         };
+        this.view.partials = ['header'];
+        
         next();
     },
     after: function(next) {

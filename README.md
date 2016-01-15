@@ -1,15 +1,13 @@
 # 261claim.eu
 261claim.eu is a webbased app built on ExpressJS.
 
-<<<<<<< HEAD
-=======
 ### Table of contents
 1. [Dependencies](#dependencies)
 2. [Installation](#installation)
 3. [Routing](#routing)
 4. [MVC setup](#mvc-setup)
+4. [API](#api)
 
->>>>>>> 82963a56938e89b385610930832f50fd871987e5
 ## Dependencies
 Make sure the following dependencies have been installed on the target machine and are accessible from the project folder. All the Node.js specific dependencies are defined by `package.json` and don't require separate installation.
 
@@ -22,29 +20,17 @@ Make sure the following dependencies have been installed on the target machine a
 
 1. Pull this project from GitHub.
 2. Run `npm install` in the project directory.
-<<<<<<< HEAD
-3. Create a MySQL database and add the credentials in JSON format to `configs/db.json` (see `db.sample.json` for an example).
-4. Run `sql/schema.sql` and `sql/data.sql` on the database to create the table schemata and to import the app data.
-=======
 3. Create a MySQL database and add the credentials in JSON format to `configs/db.json`.
-4. Import the database schema and data SQL files in `/sql/` on your MySQL server.
->>>>>>> a22fba615a07502d3fbf6d66c33bbf64531b1521
+4. Run `node mysql.install.js` (file is not yet included, so don't bother trying).
 5. Run `nodemon bin/www` from the project directory.
 6. By default the app runs locally on port 3000. Go to `http://localhost:3000` in your web browser. Replace `localhost` with the IP address of your server, if the app has been installed remotely.
 7. Enjoy :).
  
 ## Routing
-<<<<<<< HEAD
-A custom routing schedule has been implemented in `router.js` to support autodiscovery of valid routes. Typically, a route has the structure `/<directories>/<controller>/<action>/<params>`. It takes the request path and splits it. Next, the following logic is applied:
-
-1. Shift the first element from `req.path` and test if a directory with this value exists in `app.locals.paths.controllers` (this is the base directory for the controllers).
-  1. If `true`, add the value to `req.directory`, apply step 1 with the next element in path.
-=======
 A custom routing schema has been implemented in `router.js` to support autodiscovery of valid routes. Typically, a route has the structure `/<directories>/<controller>/<action>/<params>`. It takes the request path and splits it. Next, the following logic is applied:
 
 1. Shift the first element from `req.path` and test if a directory with this value exists in `app.locals.paths.controllers` (this is the base directory for the controllers).
   1. If `true`, add the value to `req.directory`, apply step 1 with the next element in `req.path`.
->>>>>>> 82963a56938e89b385610930832f50fd871987e5
   2. If `false`, continue to step 2.
 2. Shift the first element from `req.path` and add the value to `req.controller`. If `undefined`, default to `index`.
 3. Shift the first element from `req.path` and add the value to `req.action`. If `undefined`, default to `index`.
@@ -56,41 +42,15 @@ A custom routing schema has been implemented in `router.js` to support autodisco
 6. Run the controller in `app.locals.paths.controllers + '/' + req.directory + '/' + req.controller.CamelCase() + 'Controller'` with action `req.action.camelCase() + 'Action'`. The controller is an object and must be an instance of `BaseController`. The controller object must contain the method with the name of the action (e.g. `indexAction: function() {}`). Throw a 404 error if the controller or action do not exist.
 
 ### Example
-<<<<<<< HEAD
-#### Assumptions
-- Based on the HTTP request: `GET http://localhost:3000/api/eu261/eligible-route/kl/ams/svo`.
-- The verb `GET` is allowed for this action by the value of `app.locals.verbs['_default']`.
-- The directory `./controllers/api` exists, but `./controllers/api/eu261` does not.
-
-
-
-#### Result
-Controller file: `./controllers/api/Eu261Controller.js`.
-Action: `eligibleRouteAction()`.
-*Note: As you can see above, the router will add `Controller` to the value in `req.controller` and `Action` to the value in `req.action`.*
-```
-// Set by configuration in ./configs/paths.js
-app.locals.paths.controllers = './controllers';
-
-// Values of the variables in the app after applying the routing procedure on /api/eu261/eligible-route/kl/ams/svo
-req.directory = 'api';
-req.controller = 'Eu261'; // Controller value after CamelCase() has been applied
-req.action = 'eligibleRoute'; // Action value after camelCase() has been applied
-req.params = ['kl', 'ams', 'svo'];
-```
-
-## MVC paradigm
-=======
 Based on the HTTP request `GET http://localhost:3000/api/eu261/eligible-route/kl/ams/svo`.
 
 #### Values added to `req` after the routing procedure
 These variables will be available in the Controller class.
 ```javascript
-
 req.directory = 'api'; // The directory ./controllers/api exists and will be used
-req.controller = 'eu261'; // Value after CamelCase() will be Eu261
-req.action = 'eligible-route'; // Value after camelCase() will be eligibleRoute
-req.route = 'api/eu261/eligible-route';
+req.controller = 'Eu261'; // Controller value after CamelCase() has been applied
+req.action = 'eligibleRoute'; // Action value after camelCase() has been applied
+req.route = 'api/Eu261/eligibleRoute';
 req.params = ['kl', 'ams', 'svo'];
 ```
 
@@ -100,38 +60,11 @@ The following controller file and action are parsed. As you can see, the router 
 - Action: `eligibleRouteAction()`
 
 ## MVC setup
->>>>>>> 82963a56938e89b385610930832f50fd871987e5
 ### Model
 
 ### View
 
 ### Controller
-<<<<<<< HEAD
-A base controller file has the following structure.
-<<<<<<< HEAD
-```
-=======
-```javascript
->>>>>>> 82963a56938e89b385610930832f50fd871987e5
-/**
- * Route: http://localhost:3000/my
- * Filename: ./controllers/MyController.js
- */
-var merge = require('merge');
-
-// Replace BaseController with any other abstract controller in the _abstract folder
-var BaseController = require('./_abstract/BaseController');
-
-module.exports = function(app, req, res, next) {
-    var parent = new BaseController(app, req, res, next);
-
-    return merge(Object.create(parent), {
-        indexAction: function() {
-            // Action logic goes here
-        }
-    });
-};
-=======
 A controller file has the following structure. Replace `BaseController` with any controller name in the `controller/_abstract` directory. This directory is automatically included during the bootstrap in `app.js`, so there is no need to explicitly require it in the controller.
 ```javascript
 module.exports = BaseController.extend({
@@ -139,6 +72,37 @@ module.exports = BaseController.extend({
         next();
     }
 });
->>>>>>> a22fba615a07502d3fbf6d66c33bbf64531b1521
 ```
 
+## API
+You can perform all (S)CRUD operations on the following URI’s via HTTP. `<root>` must be replaced by the base URI of the application (typically the domain name).
+
+### Search: `GET <root>/api/country/search/<column>/<query>`
+* `<column>` can take the values `name`, `id`, `alpha2` or `alpha3`
+* `<query>` is a string with the search value
+* Returns an array of countries that match the criteria
+### Read: `GET <root>/api/country/read/<id>`
+* `<id>` is a string with the ISO 3166-1 ID code
+* Returns an object with the inserted data on success.
+
+### Create: `PUT/POST <root>/api/country/create`
+* Accepts these PUT/POST parameters. 
+ * `id` (Required, Unique, Integer (4), ISO 3166-1 ID code)
+ * `alpha2` (Required, Unique, CHAR(2), ISO 3166-1 Alpha 2 code)
+ * `alpha3` (Required, Unique, CHAR(3) ISO 3166-1 Alpha 3 code)
+ * `name` (Required, Unique, Varchar(64) UNGEGN Country name)
+ * `alt_name` (Optional, Unique or NULL, Varchar(64) name as most commonly used)
+* Returns an object with the inserted data on success.
+
+### Update: `PUT/PATCH <root>/api/country/update/<id>`
+* `<id>` is a string with the ISO 3166-1 ID code
+* Accepts these PUT/PATCH parameters. 
+ * `alpha2` Required, Unique, CHAR(2), ISO 3166-1 Alpha 2 code)
+ * `alpha3` (Required, Unique, CHAR(3) ISO 3166-1 Alpha 3 code)
+ * `name` (Required, Unique, Varchar(64) UNGEGN Country name)
+ * `alt_name` (Optional, Unique or NULL, Varchar(64) name as most commonly used)
+* Returns an object with the inserted data on success.
+
+### Delete: `DELETE <root>/api/country/delete/<id>`
+ * `<id>` is a string with the ISO 3166-1 ID code
+ * Returns status code 200 on success.

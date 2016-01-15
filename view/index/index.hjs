@@ -1,5 +1,4 @@
-{{> header}}
-{{ currentTitle }}
+[[> header]]
 <section class="main-section container">
     <div class="row" id="claim-process">
         <div class="col-md-4">

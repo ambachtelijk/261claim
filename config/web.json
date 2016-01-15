@@ -1,6 +1,0 @@
-{
-    "layout": "layout/main",
-    "partials": {
-        "_nav": "layout/main/nav"
-    }
-}
