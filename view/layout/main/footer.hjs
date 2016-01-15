@@ -1,0 +1,24 @@
+<footer class="footer main-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-4"><h4>About Us</h4></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 text-right">
+                <ul class="list-unstyled" style="line-height: 2em;">
+                    <li><a href="#">F.A.Q.&nbsp;&nbsp;<span class="fa fa-fw fa-angle-left"></span></a></li>
+                    <li><a href="#">Legal Information&nbsp;&nbsp;<span class="fa fa-fw fa-angle-left"></span></a></li>
+                    <li><a href="#">Contact&nbsp;&nbsp;<span class="fa fa-fw fa-angle-left"></span></a></li>
+                </ul>
+            </div>
+            <div class="col-sm-8">
+                <p>Chicharrones vice pitchfork ennui cray tofu, mustache sustainable. Actually vice franzen meh synth banjo. Blog flexitarian art party mustache, quinoa meh whatever bicycle rights direct trade salvia VHS cred. Affogato organic neutra tofu green juice offal, banh mi bespoke dreamcatcher disrupt. Hashtag marfa 3 wolf moon, lomo cray vegan etsy post-ironic. Pour-over ugh plaid irony marfa. Pop-up mlkshk fixie 8-bit, vegan freegan paleo celiac lo-fi pug yuccie sriracha aesthetic roof party.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 text-center copyright">
+                &copy; 261Claim.eu - All Rights Reserved
+            </div>
+        </div>
+    </div>
+</footer>
