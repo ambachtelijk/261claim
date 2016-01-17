@@ -4,7 +4,7 @@ var HttpError = require('http-errors');
 module.exports = BaseController.extend({
     before: function(next) {
         this.res.type('json');
-        this.res.data = {};
+        this.res.results = [];
         next();
     },
     after: function(next, error) {
@@ -17,8 +17,8 @@ module.exports = BaseController.extend({
         this.res.json({
             status: error.status,
             message: error.message,
-            stack: app.get('env') === 'development' ? error.stack.split("\n") : null,
-            data: this.res.data
+            stack: app.get('env') === 'development' && error.status !== 200 ? error.stack.split("\n") : null,
+            results: this.res.results
         });
         next();
     },

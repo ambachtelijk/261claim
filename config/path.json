@@ -15,5 +15,6 @@
     },
     "model": "model",
     "view": "view",
-    "public": "public"
+    "public": "public",
+    "component": "component"
 }

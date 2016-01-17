@@ -9,11 +9,6 @@
         background: fade(@bg-color-light,25%);
     }
     
-    .inner-box {
-        border-radius: @border-radius-base;
-        overflow: hidden;
-    }
-    
     h1 {
         text-shadow: 2px 2px 0px darken(@brand-primary, 25%), -1px -1px 0px darken(@brand-primary, 25%);
         margin: 0 0 1em 0;
@@ -34,11 +29,21 @@
     }
 
     .title {
-        color: @component-active-color;
+        border-top-left-radius: @border-radius-base;
+        border-top-right-radius: @border-radius-base;
         background: fade(@component-active-bg, 75%);
+        
+        a, .btn-link, .btn-inline-link {
+            color: white;
+            &:hover {
+                color: @bg-color;
+            }
+        }
     }
     
     .content {
+        border-bottom-left-radius: @border-radius-base;
+        border-bottom-right-radius: @border-radius-base;
         background: fade(@bg-color-light, 75%);
     }
     
@@ -55,7 +60,23 @@
         margin: 0;
     }
     
-    button {
-        margin-top: 1em;
+    .action {
+        margin-bottom: 0;
+        button {
+            margin-top: @grid-gutter-width / 2;
+        }
+    }
+    
+    .btn-close {
+        .text-right;
+        @media (min-width: @screen-xs-min) {
+            .pull-right;
+        }
+    }
+    
+    .form.row {
+        @media (min-width: @screen-xs-min) {
+            margin-right: 1.5em;
+        }
     }
 }

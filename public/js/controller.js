@@ -1,2 +1,79 @@
 "use strict"
-var app = angular.module('app', ['ui.bootstrap']);
+var app = angular.module('app', ['ui.bootstrap', 'ui.select', 'ngSanitize']);
+app.config(function(uiSelectConfig) {
+    uiSelectConfig.theme = 'bootstrap';
+});
+
+app.controller('IndexHeaderController', function($scope, $http, $filter, $element, $window) {
+    // Circumvent bug in Angular that prevents propagation if date is not defined as new Date(yyyy, MM, dd)
+    var today = new Date();
+    $scope.today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    $scope.legs = [];
+    
+    // This property needs to be in a method, otherwise it does not get updated
+    $scope.hasMaxLegs = function() { return !($scope.legs.length < 5); };
+    
+    $scope.create = function() {
+        if(!$scope.hasMaxLegs()) {
+            // Copy last element's airline and date
+            $scope.legs.push($scope.legs.length > 0 ? {
+                date: $scope.legs[$scope.legs.length - 1].date,
+                airline: $scope.legs[$scope.legs.length - 1].airline
+            } : {
+                date: $scope.today
+            });
+
+            // Make sure the appropriate classes are added
+            angular.element($window).trigger('resize'); 
+        }
+    }
+    
+    $scope.delete = function(i) {
+        $scope.legs.splice(i, 1);
+    }
+    
+    $scope.airlines = [];
+    $scope.getAirlines = function(query) {
+        // Do not GET anything if query less than 2 characters 
+        if(query.length < 2) {
+            $scope.airlines = [];
+            return;
+        }
+
+        $http.get('/api/airline/search/all/'+query, {
+        }).then(function(response){
+            $scope.airlines = response.data.results
+            $scope.airlines.forEach(function(airport, i) {
+                $scope.airlines[i].matchedBy = airport.iata === query.toUpperCase() ? 'IATA' : 'Airport';
+            });
+            
+            // Make sure that the IATA code match always appears on top
+            $scope.airlines.sort(function(a, b) {
+                if(a.matchedBy === 'IATA' && b.matchedBy !== 'IATA') { return -1; }
+                if(b.matchedBy === 'IATA' && a.matchedBy !== 'IATA') { return 1; }
+                return a.name.localeCompare(b.name);
+            });
+        });
+    };
+  
+    if($window.matchMedia) {
+        var resize;
+        angular.element($window).bind('resize', function() {
+            // Prevent the client from overloading
+            clearTimeout(resize);
+            resize = setTimeout(function() {
+                if($window.matchMedia('(min-width: 480px)').matches) {
+                    $element.find('.form-group').addClass('form-group-lg');
+                    $element.find('.input-group').addClass('input-group-lg');
+                    $element.find('.action.row button').addClass('btn-lg');
+                    $element.find('.btn-close a').addClass('form-text');
+                } else {
+                    $element.find('.form-group').removeClass('form-group-lg');
+                    $element.find('.input-group').removeClass('input-group-lg');
+                    $element.find('.action.row button').removeClass('btn-lg');
+                    $element.find('.btn-close a').removeClass('form-text');
+                }
+            }, 50);
+        }).trigger('resize');
+    }
+});

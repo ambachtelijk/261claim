@@ -16,6 +16,21 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `air`
+--
+
+DROP TABLE IF EXISTS `air`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `air` (
+  `iata` varchar(255) NOT NULL,
+  `icao` varchar(255) NOT NULL,
+  `wiki` varchar(255) NOT NULL,
+  `alt_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `airline`
 --
 
@@ -23,6 +38,7 @@ DROP TABLE IF EXISTS `airline`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `airline` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `iata` char(2) NOT NULL,
   `icao` char(3) NOT NULL,
   `name` varchar(32) NOT NULL,
@@ -30,13 +46,14 @@ CREATE TABLE `airline` (
   `country` char(2) DEFAULT NULL,
   `comments` varchar(255) NOT NULL,
   `active` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `icao` (`icao`),
+  UNIQUE KEY `name` (`name`),
   KEY `iata` (`iata`),
-  KEY `airline` (`name`),
   KEY `active` (`active`),
-  KEY `icao` (`icao`),
   KEY `country` (`country`),
   CONSTRAINT `airline_ibfk_1` FOREIGN KEY (`country`) REFERENCES `country` (`alpha2`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1017 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,19 +64,26 @@ DROP TABLE IF EXISTS `airport`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `airport` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `iata` char(3) NOT NULL,
+  `icao` char(4) DEFAULT NULL,
   `name` varchar(64) NOT NULL,
-  `city` varchar(64) NOT NULL,
+  `alt_name` varchar(255) DEFAULT NULL,
+  `city` varchar(64) DEFAULT NULL,
   `country` char(2) DEFAULT NULL,
   `timezone` varchar(32) NOT NULL,
   `lat` float NOT NULL,
   `lng` float NOT NULL,
-  PRIMARY KEY (`iata`),
+  `wiki` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `iata` (`iata`),
+  UNIQUE KEY `icao` (`icao`),
   KEY `name` (`name`),
   KEY `city` (`city`),
   KEY `country` (`country`),
+  KEY `alt_name` (`alt_name`),
   CONSTRAINT `airport_ibfk_1` FOREIGN KEY (`country`) REFERENCES `country` (`alpha2`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3311 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,4 +117,4 @@ CREATE TABLE `country` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-15 12:47:54
+-- Dump completed on 2016-01-17 11:07:07

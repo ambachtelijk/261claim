@@ -38,5 +38,6 @@ nbproject
 sql/csv
 
 wireframes
-
 environment.js
+
+public/bower

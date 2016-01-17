@@ -30,7 +30,7 @@ Fs.readdirSync(Path.join(app.basedir, 'config')).forEach(function(filename) {
 });
 
 // Add additional JS features
-require(Path.join(app.basedir, 'php'));
+require(Path.join(app.basedir, app.config.path.component, 'php'));
 
 // Preload all abstract controllers
 // Each controller has to be loaded in the right order, to prevent fatal exceptions
@@ -75,7 +75,7 @@ app.use(Less(Path.join(app.basedir, app.config.path.public || 'public')));
 app.use(Express.static(Path.join(app.basedir, app.config.path.public || 'public')));
 
 // This is where the magic happens: route the request
-app.use(require(Path.join(app.basedir, 'router')));
+app.use(require(Path.join(app.basedir, app.config.path.component, 'router')));
 
 // Catch errors
 app.use(function(error, req, res, next) {

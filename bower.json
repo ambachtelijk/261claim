@@ -1,0 +1,23 @@
+{
+  "name": "261claim",
+  "description": "",
+  "main": "",
+  "authors": [
+    "ehmPlankje"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ehmPlankje/261claim",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6",
+    "angular-bootstrap": "~1.0.3",
+    "ui-select": "angular-ui/ui-select#~0.13.2"
+  }
+}
