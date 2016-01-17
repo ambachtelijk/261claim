@@ -1,8 +1,22 @@
+/**
+ * Could not adjusted with LESS variables
+ */
 .navbar-toggle {
     padding: 6px 3px;
 }
 
+.btn {
+    /* Never asked for the fugly outline in the first place */
+    outline: none !important;
+    &.btn-inline-link {
+        .btn-link;
+        padding: 0;
+    }
+}
 
+/**
+ * Intermediate breakpoint for visibility. Is missing in Bootstrap 3
+ */
 .hidden-ms {
   @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
     .responsive-invisibility();
@@ -29,3 +43,32 @@
     display: inline-block !important;
   }
 }
+
+/**
+ * Create .form-text class to force texts to comply with the form dimensions
+ */
+.form-text {
+    display: inline-block;
+    padding-top: (@padding-base-vertical);
+    font-size: @font-size-base;
+}
+    
+.form-group-sm {
+    .form-text {
+        padding-top: (@padding-small-vertical);
+        font-size: @font-size-small;
+    }
+}
+
+.form-group-lg {
+    .form-text {
+        padding-top: (@padding-large-vertical);
+        font-size: @font-size-large;
+    }
+}
+
+.ui-select-bootstrap .ui-select-choices-row>a {
+    line-height: @line-height-base;
+}
+
+

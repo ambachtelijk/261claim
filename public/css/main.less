@@ -1,16 +1,5 @@
-.main-section {
-    
-    padding-top: 30px;
-    padding-bottom: 30px;
-    
-    @media (min-width: @screen-sm-min) {
-        padding-top: 60px;
-        padding-bottom: 60px;
-    }
-    
-    > h1:first-child, > .row > .col > h1:first-child {
-        margin-top: 0;
-    }
+body {
+    font-weight: @font-weight-base;
 }
 
 body > .navbar + .main-section {
@@ -34,6 +23,20 @@ nav a.navbar-brand {
 
 nav div.navbar-btn {
     padding: 0 @navbar-padding-horizontal / 2;
+}
+
+.main-section {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    
+    @media (min-width: @screen-sm-min) {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+    
+    > h1:first-child, > .row > .col > h1:first-child {
+        margin-top: 0;
+    }
 }
 
 .circle {
