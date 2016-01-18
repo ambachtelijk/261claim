@@ -105,8 +105,8 @@ app.controller('IndexHeaderController', function($scope, $http, $element, $windo
     // Circumvent bug in Angular that prevents propagation if date is not defined as new Date(yyyy, MM, dd)
     var today = new Date();
     $scope.today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    //$scope.legs = [];
-    $scope.legs = [
+    $scope.legs = [];
+ /*   $scope.legs = [
   {
     "date": new Date(today.getFullYear(), today.getMonth(), today.getDate()-2),
     "airline": {
@@ -131,7 +131,7 @@ app.controller('IndexHeaderController', function($scope, $http, $element, $windo
     "flights": false
   }
 ];
-    
+    */
     
     // This property needs to be in a method, otherwise it does not get updated
     $scope.hasMaxLegs = function() { return !($scope.legs.length < 5); };
