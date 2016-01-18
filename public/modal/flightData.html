@@ -1,0 +1,42 @@
+<div class="modal-header">
+    <h3 class="modal-title"><span class="fa fa-fw fa-spinner fa-pulse" ng-hide="loadedLegs"></span> Searching flights...</h3>
+</div>
+<div class="modal-body">
+    <!--pre>{{legs | json}}</pre-->
+    <div ng-repeat="leg in legs">
+        <h3><span ng-bind-html="leg.airline.iata + ' ' + leg.flight"></span> <small ng-bind-html="leg.airline.name"></small></h3>
+        <div ng-hide="leg.flights !== null" class="text-center"><span class="fa fa-lg fa-fw fa-spinner fa-pulse"></span></div>
+        <div ng-hide="leg.flights.length > 0" class="text-center"><em>No matching flights found</em></div>
+        <table class="table" ng-repeat="flight in leg.flights">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th><h4>{{flight.origin.iata}} <small>(<span ng-bind-html="flight.origin.name"></span>)</small></h4></th>
+                    <th><h4>{{flight.destination.iata}} <small>(<span ng-bind-html="flight.destination.name"></span>)</small></h4></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Planned</td>
+                    <td>{{flight.departure}}</td>
+                    <td>{{flight.arrival}}</td>
+                </tr>
+                <tr>
+                    <td>Actual</td>
+                    <td>{{flight.actualDeparture}}</td>
+                    <td>{{flight.actualArrival}}</td>
+                </tr>
+                <tr>
+                    <td>Difference</td>
+                    <td>{{(flight.diff.arrival.hours % 24) | number}} hours and {{(flight.diff.arrival.minutes % 60) | number}} minutes</td>
+                    <td>{{(flight.diff.departure.hours % 24) | number}} hours and {{(flight.diff.departure.minutes % 60) | number}} minutes</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div ng-if="legs.length === 0" class="text-center"><em>No flights entered is search field</em></div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-link" type="button" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" type="button" ng-click="signInValidate()" ng-disabled="!loadedLegs">Continue</button>
+</div>
