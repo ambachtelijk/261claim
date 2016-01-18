@@ -17,9 +17,18 @@ app.controller('FlightDataModalController', function($scope, $q, $http, $uibModa
         $uibModalInstance.dismiss();
     }
     
+    $scope.legsModal = [];
     
     var promises = [];
     $scope.legs.forEach(function(leg) {
+        if(!leg || !leg.airline || !leg.date || !leg.flight) {
+            return;
+        }
+        $scope.legsModal.push(leg);
+    });
+    
+    
+    $scope.legsModal.forEach(function(leg) {
         promises.push($http({
             url: '/api/flight/search', 
             method: 'GET',
@@ -38,9 +47,14 @@ app.controller('FlightDataModalController', function($scope, $q, $http, $uibModa
         ));
     });
     
-    $q.all(promises).then(function() {
+    if(promises.length > 0) {
+        $q.all(promises).then(function() {
+            $scope.loadedLegs = true;
+        });
+    } else {
+        console.log('loaded');
         $scope.loadedLegs = true;
-    });
+    }
 });
 
 app.controller('UserController', function($scope, $http, $uibModal, AuthService) {

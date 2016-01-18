@@ -1,13 +1,14 @@
 <div class="modal-header">
-    <h3 class="modal-title"><span class="fa fa-fw fa-spinner fa-pulse" ng-hide="loadedLegs"></span> Searching flights...</h3>
+    <h3 class="modal-title" ng-hide="loadedLegs"><span class="fa fa-fw fa-spinner fa-pulse"></span> Searching flights...</h3>
+    <h3 class="modal-title" ng-show="loadedLegs">Select your flights</h3>
 </div>
 <div class="modal-body">
     <!--pre>{{legs | json}}</pre-->
-    <div ng-repeat="leg in legs">
+    <div ng-repeat="leg in legsModal">
         <h3><span ng-bind-html="leg.airline.iata + ' ' + leg.flight"></span> <small ng-bind-html="leg.airline.name"></small></h3>
         <div ng-hide="leg.flights !== null" class="text-center"><span class="fa fa-lg fa-fw fa-spinner fa-pulse"></span></div>
-        <div ng-hide="leg.flights.length > 0" class="text-center"><em>No matching flights found</em></div>
-        <table class="table" ng-repeat="flight in leg.flights">
+        <div ng-show="leg.flights === false" class="text-center"><em>No matching flights found</em></div>
+        <table class="table table-responsive" ng-repeat="flight in leg.flights">
             <thead>
                 <tr>
                     <th></th>
@@ -34,7 +35,7 @@
             </tbody>
         </table>
     </div>
-    <div ng-if="legs.length === 0" class="text-center"><em>No flights entered is search field</em></div>
+    <div ng-if="legsModal.length === 0" class="text-center"><em>No flights entered is search field</em></div>
 </div>
 <div class="modal-footer">
     <button class="btn btn-link" type="button" ng-click="cancel()">Cancel</button>
