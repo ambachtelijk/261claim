@@ -3,7 +3,7 @@ var HttpError = require('http-errors');
 var Path = require('path');
 
 module.exports = ApiController.extend({
-    searchAction: function(next, key, value) {
+    searchAction: function(resolve, reject, key, value) {
         if(value === undefined) {
             value = '';
             //throw new HttpError(400, 'Request did not match expected formatting, e.g. country/search/name/Netherlands');
@@ -34,7 +34,7 @@ module.exports = ApiController.extend({
 
         return Airline.findAll({where: where}).bind(this).then(function(airlines) {
             this.res.results = JSON.parse(JSON.stringify(airlines));
-            next();
+            resolve();
         });
     }
 });

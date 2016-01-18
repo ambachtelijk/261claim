@@ -1,3 +1,9 @@
+/* Never asked for the fugly outline in the first place */
+*, *:before, *:after {
+    outline: none !important;
+
+}
+
 /**
  * Could not adjusted with LESS variables
  */
@@ -6,8 +12,7 @@
 }
 
 .btn {
-    /* Never asked for the fugly outline in the first place */
-    outline: none !important;
+
     &.btn-inline-link {
         .btn-link;
         padding: 0;

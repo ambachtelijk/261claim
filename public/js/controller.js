@@ -1,10 +1,74 @@
 "use strict"
-var app = angular.module('app', ['ui.bootstrap', 'ui.select', 'ngSanitize']);
-app.config(function(uiSelectConfig) {
-    uiSelectConfig.theme = 'bootstrap';
+var app = angular.module('app');
+
+app.controller('ApplicationController', function($scope, AuthService) {
+    AuthService.refresh();
+    $scope.user = AuthService.user;
+    $scope.isLoggedIn = AuthService.isLoggedIn();
+    $scope.setUser = function(user) {
+        $scope.user.model = user;
+    }
 });
 
-app.controller('IndexHeaderController', function($scope, $http, $filter, $element, $window) {
+app.controller('UserController', function($scope, $http, $uibModal, AuthService) {
+    function modal(action) {
+        event.preventDefault();
+        return $uibModal.open({
+            templateUrl: '/modal/user/' + action + '.html',
+            controller: 'UserModalController',
+            size: 'md',
+            scope: $scope
+        });
+    };
+    $scope.signIn = function() { return modal('sign-in'); }
+    $scope.signUpSuccess = function() { return modal('sign-up-success'); }
+    $scope.signUp = function() { return modal('sign-up'); }
+    $scope.signOut = function() { AuthService.logout().then(function() { $scope.setUser(); }); }
+});
+
+app.controller('UserModalController', function($scope, $uibModalInstance, AuthService) {
+    var type = '';
+    
+    $scope.userModalModel = { remember: true }
+    $scope.userModalError = false;
+    $scope.submitted = false;
+    
+    $scope.cancel = function() { $uibModalInstance.dismiss(); }
+    $scope.close = function() { $uibModalInstance.close(); }
+    
+    $scope.signInValidate = function() {
+        type = 'SIGNIN';
+        AuthService.login($scope.userModalModel).then(success, error);
+    };
+    
+    $scope.signUpValidate = function() {
+        type = 'SIGNUP';
+        $scope.submitted = true;
+        
+        if(!$scope.userModalForm.$invalid) {
+            AuthService.create($scope.userModalModel).then(success, error);
+        }
+    }
+    
+    function success(response) {
+        $scope.userModalError = false;
+        $scope.setUser(response.data.results);
+        $uibModalInstance.close();
+        
+        switch(type) {
+            case 'SIGNUP':
+                // Show success message
+                return $scope.signUpSuccess();
+                break;
+        }
+    }
+    
+    function error(response) {
+        $scope.userModalError = response.data;
+    }
+});
+
+app.controller('IndexHeaderController', function($scope, $http, $element, $window) {
     // Circumvent bug in Angular that prevents propagation if date is not defined as new Date(yyyy, MM, dd)
     var today = new Date();
     $scope.today = new Date(today.getFullYear(), today.getMonth(), today.getDate());

@@ -1,0 +1,9 @@
+<div class="modal-header">
+    <h3 class="modal-title">Thank you for joining us</h3>
+</div>
+<div class="modal-body form-horizontal" ng-keyup="$event.keyCode == 13 && close()">
+You have registered with the username <strong ng-bind-html="user.model.email"></strong>. You can now continue to use the website.
+</div>
+<div class="modal-footer">
+    <button class="btn btn-success" type="button" ng-click="close();">Close</button>
+</div>

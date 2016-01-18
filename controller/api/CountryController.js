@@ -1,15 +1,14 @@
 "use strict"
 var HttpError = require('http-errors');
 var Path = require('path');
+var Country = app.db.import(Path.join(app.basedir, app.config.path.model, 'Country'));
 
 module.exports = ApiController.extend({
-    searchAction: function(next, key, value) {
+    searchAction: function(resolve, reject, key, value) {
         if(value === undefined) {
             value = '';
             //throw new HttpError(400, 'Request did not match expected formatting, e.g. country/search/name/Netherlands');
         }
-        
-        let Country = app.db.import(Path.join(app.basedir, app.config.path.model, 'Country'));
         
         // Compose query
         let where = {};
@@ -30,48 +29,42 @@ module.exports = ApiController.extend({
 
         return Country.findAll({where: where}).bind(this).then(function(countries) {
             this.res.data = JSON.parse(JSON.stringify(countries));
-            next();
+            resolve();
         });
     },
-    createAction: function(next) {
-        let Country = app.db.import(Path.join(app.basedir, app.config.path.model, 'Country'));
+    createAction: function(resolve, reject) {
         return Country.create(this.req.body).bind(this).then(function(country) {
             this.res.data = JSON.parse(JSON.stringify(country));
-            next();
+            resolve();
         });
     },
-    readAction: function(next, id) {
+    readAction: function(resolve, reject, id) {
         if(id === undefined) {
             throw new HttpError(400, 'Request did not match expected formatting, e.g. country/read/id');
         }
-        
-        let Country = app.db.import(Path.join(app.basedir, app.config.path.model, 'Country'));
         
         return Country.findById(id).bind(this).then(function(country) {
             this.res.data = JSON.parse(JSON.stringify(country));
         }).then(next);
     },
-    updateAction: function(next, id) {
+    updateAction: function(resolve, reject, id) {
         if(id === undefined) {
             throw new HttpError(400, 'Request did not match expected formatting, e.g. country/update/id');
         }
-        
-        let Country = app.db.import(Path.join(app.basedir, app.config.path.model, 'Country'));
         
         return Country.findById(id).bind(this).then(function(country) {
             return country.updateAttributes(this.req.body);
         }).then(function(country) {
             this.res.data = JSON.parse(JSON.stringify(country));
-        }).then(next);
+        }).then(resolve);
     },
-    deleteAction: function(next, id) {
+    deleteAction: function(resolve, reject, id) {
         if(id === undefined) {
             throw new HttpError(400, 'Request did not match expected formatting, e.g. country/delete/id');
         }
         
-        let Country = app.db.import(Path.join(app.basedir, app.config.path.model, 'Country'));
         return Country.findById(id).bind(this).then(function(country) {
             return country.destroy();
-        }).then(next);
+        }).then(resolve);
     }
 });

@@ -1,18 +1,18 @@
 "use strict"
 module.exports = WebController.extend({
-    indexAction: function(next) {
+    indexAction: function(resolve, reject) {
         this.view.params = {
             title: 'Cancelled or delayed flight? File your claim now',
         };
         this.view.partials = ['header'];
         
-        next();
+        resolve();
     },
-    after: function(next) {
+    after: function(resolve, reject) {
         // Set suffix to title
         this.view.params.title = this.view.params.title + ' | 261claim.eu';
         
-        this.parent(next);
-        next();
+        this.parent(resolve, reject);
+        resolve();
     }
 });

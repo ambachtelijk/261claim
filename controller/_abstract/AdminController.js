@@ -1,4 +1,3 @@
 "use strict"
-module.exports = BaseController.extend({
-
+module.exports = WebController.extend({
 });

@@ -45,8 +45,8 @@ module.exports = Router.all('/*', function (req, res, next) {
         req.directory = req.directory || '';
         req.controller = req.controller || app.config.path.controller.name;
 
-        // Get the remaining path: first element is the action
-        req.action = path.length !== route.length 
+        // Get the remaining path
+        req.action = path.length !== route.length && path.length !== 0
             ? route.slice(path.length + 1).split('/').shift()
             : app.config.path.controller.action || 'index';
 
@@ -87,14 +87,17 @@ module.exports = Router.all('/*', function (req, res, next) {
         }
     } catch(error) {
         var controller = new WebController(req, res);
-        controller.errorHandler(next, error);
+        controller.errorHandler(error);
     }
     
     // From here we have errors that can be dealt with
     try {
         // Find the allowed HTTP verbs for this request
         let verbs = [];
-        if(app.config.verb && app.config.verb[req.route]) {
+        
+        if(controller.config.verb[req.action]) {
+            verbs = controller.config.verb[req.action];
+        } else if(app.config.verb && app.config.verb[req.route]) {
             verbs = app.config.verb[req.route];
         } else if(app.config.verb[req.action]) {
             verbs = app.config.verb[req.action];
@@ -115,6 +118,6 @@ module.exports = Router.all('/*', function (req, res, next) {
         // Dispatch the route
         controller.run(req.action, next);
     } catch(error) {
-        controller.errorHandler(next, error);
+        controller.errorHandler(error);
     }
 });

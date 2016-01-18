@@ -9,11 +9,11 @@ module.exports = BaseController.extend({
         partials: [],
         params: {}
     },
-    before: function(next) {
+    before: function(resolve, reject) {
         this.view.file = this.req.route;
-        next();
+        resolve();
     },
-    after: function(next) {
+    after: function(resolve, reject) {
         if(this.res.headersSent) {
             return true;
         }
@@ -40,7 +40,10 @@ module.exports = BaseController.extend({
         
         // Do the actial rendering
         this.res.render(this.config.layout, params);
-        next();
+        
+        if(resolve) {
+            resolve();
+        }
     },
     init: function(req, res) {
         // Load specific settings for the WebController
@@ -49,10 +52,10 @@ module.exports = BaseController.extend({
         
         this.parent(req, res);
     },
-    errorHandler: function(next, error) {
+    errorHandler: function(error) {
         this.view.file = 'error';
         this.view.params.error = error;
         this.res.status(error.status);
-        this.after(next);
+        this.after();
     }
 });

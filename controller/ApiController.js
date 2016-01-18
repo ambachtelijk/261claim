@@ -1,6 +1,5 @@
 "use strict"
 var HttpError = require('http-errors');
 
-module.exports = ApiController.extend({
-
-});
+// Placeholder to ensure communication is in JSON
+module.exports = ApiController.extend({});

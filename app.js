@@ -7,6 +7,8 @@ var Logger = require('morgan');
 var Sequelize = require('sequelize');
 var CookieParser = require('cookie-parser');
 var BodyParser = require('body-parser');
+var ExpressSession = require('express-session');
+
 
 // Load Express.js and create an instance of the app
 var Express = require('express');
@@ -60,6 +62,8 @@ app.db = new Sequelize(
     }
 );
 
+app.passport = require(Path.join(app.basedir, app.config.path.component, 'passport'));
+
 // Set up view renderer
 app.locals.delimiters = '[[ ]]'; // Change Hogan delimiters to avoid conflicts with Angular
 
@@ -68,11 +72,18 @@ app.set('view engine', 'hjs');
 
 // Front end interaction
 //app.use(Favicon(Path.join(__dirname, 'public', 'favicon.ico')));app.use(logger('dev'));
-app.use(BodyParser.json());
-app.use(BodyParser.urlencoded({ extended: false }));
-app.use(CookieParser());
+//app.use(require('morgan')('combined'));
 app.use(Less(Path.join(app.basedir, app.config.path.public || 'public')));
 app.use(Express.static(Path.join(app.basedir, app.config.path.public || 'public')));
+app.use(BodyParser.json());
+app.use(BodyParser.urlencoded({ extended: true }));
+app.use(CookieParser());
+app.use(ExpressSession({secret: 'mySecretKey',resave: false,saveUninitialized: false}));
+
+// Load authentication module
+app.use(app.passport.initialize());
+app.use(app.passport.session());
+
 
 // This is where the magic happens: route the request
 app.use(require(Path.join(app.basedir, app.config.path.component, 'router')));
