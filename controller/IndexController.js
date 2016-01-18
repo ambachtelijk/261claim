@@ -8,13 +8,13 @@ module.exports = WebController.extend({
         
         resolve();
     },
-    faqAction: function() {
+    faqAction: function(resolve, reject) {
         resolve();
     },
-    legalAction: function() {
+    legalAction: function(resolve, reject) {
         resolve();
     },
-    contactAction: function() {
+    contactAction: function(resolve, reject) {
         resolve();
     },
     after: function(resolve, reject) {
