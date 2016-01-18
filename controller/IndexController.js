@@ -16,7 +16,7 @@ module.exports = WebController.extend({
     },
     contactAction: function() {
         resolve();
-    }
+    },
     after: function(resolve, reject) {
         // Set suffix to title
         this.view.params.title = this.view.params.title + ' | 261claim.eu';
