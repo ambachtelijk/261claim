@@ -8,6 +8,15 @@ module.exports = WebController.extend({
         
         resolve();
     },
+    faqAction: function() {
+        resolve();
+    },
+    legalAction: function() {
+        resolve();
+    },
+    contactAction: function() {
+        resolve();
+    }
     after: function(resolve, reject) {
         // Set suffix to title
         this.view.params.title = this.view.params.title + ' | 261claim.eu';
