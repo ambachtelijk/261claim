@@ -10,6 +10,39 @@ app.controller('ApplicationController', function($scope, AuthService) {
     }
 });
 
+app.controller('FlightDataModalController', function($scope, $q, $http, $uibModalInstance) {
+
+    $scope.loadedLegs = false;
+    $scope.cancel = function() {
+        $uibModalInstance.dismiss();
+    }
+    
+    
+    var promises = [];
+    $scope.legs.forEach(function(leg) {
+        promises.push($http({
+            url: '/api/flight/search', 
+            method: 'GET',
+            params: {
+                date: leg.date.getFullYear() + '-' + leg.date.getMonth() + 1 + '-' + leg.date.getDate(),
+                icao: leg.airline.icao,
+                flight: leg.flight
+            }
+        }).then(
+            function(response) {
+                leg.flights = response.data.results;
+            }, 
+            function(response) {
+                leg.flights = false;
+            }
+        ));
+    });
+    
+    $q.all(promises).then(function() {
+        $scope.loadedLegs = true;
+    });
+});
+
 app.controller('UserController', function($scope, $http, $uibModal, AuthService) {
     function modal(action) {
         event.preventDefault();
@@ -68,11 +101,37 @@ app.controller('UserModalController', function($scope, $uibModalInstance, AuthSe
     }
 });
 
-app.controller('IndexHeaderController', function($scope, $http, $element, $window) {
+app.controller('IndexHeaderController', function($scope, $http, $element, $window, $uibModal) {
     // Circumvent bug in Angular that prevents propagation if date is not defined as new Date(yyyy, MM, dd)
     var today = new Date();
     $scope.today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    $scope.legs = [];
+    //$scope.legs = [];
+    $scope.legs = [
+  {
+    "date": new Date(today.getFullYear(), today.getMonth(), today.getDate()-2),
+    "airline": {
+      "id": 37,
+      "iata": "SU",
+      "icao": "AFL",
+      "name": "Aeroflot Russian Airlines",
+      "matchedBy": "IATA"
+    },
+    "flight": "2168"
+  },
+  {
+    "date": new Date(today.getFullYear(), today.getMonth(), today.getDate()-2),
+    "airline": {
+      "id": 37,
+      "iata": "SU",
+      "icao": "AFL",
+      "name": "Aeroflot Russian Airlines",
+      "matchedBy": "IATA"
+    },
+    "flight": "9999",
+    "flights": false
+  }
+];
+    
     
     // This property needs to be in a method, otherwise it does not get updated
     $scope.hasMaxLegs = function() { return !($scope.legs.length < 5); };
@@ -119,7 +178,24 @@ app.controller('IndexHeaderController', function($scope, $http, $element, $windo
             });
         });
     };
-  
+ 
+    /**
+     * 
+     * @todo add validation for input
+     */
+    $scope.getFlightData = function() {
+        $scope.legs.forEach(function(leg) {
+            leg.flights = null;
+        });
+        event.preventDefault();
+        return $uibModal.open({
+            templateUrl: '/modal/flightData.html',
+            controller: 'FlightDataModalController',
+            size: 'md',
+            scope: $scope
+        });
+    }
+    
     if($window.matchMedia) {
         var resize;
         angular.element($window).bind('resize', function() {

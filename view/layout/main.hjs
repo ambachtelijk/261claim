@@ -17,7 +17,8 @@
     
         <script src="/bower/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
         <script src="/bower/ui-select/dist/select.min.js"></script>
-        
+        <script src="/bower/moment/moment.js"></script>
+        <script src="/bower/moment-timezone/builds/moment-timezone-with-data-2010-2020.js"></script>
         
         <script src="/js/application.js"></script>
         <script src="/js/provider.js"></script>

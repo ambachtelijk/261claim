@@ -3,7 +3,8 @@
         <h1 class="text-center">Cancelled or delayed flight?<!--br/><small>- or -</small><br/>Lost or delayed luggage?--></h1>
         <div class="row">
             <div class="col col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-                <div class="box" ng-controller="IndexHeaderController" ng-init="create();">
+                <!--div class="box" ng-controller="IndexHeaderController" ng-init="create();" ng-keyup="$event.keyCode == 13 && getFlightData()"-->
+                <div class="box" ng-controller="IndexHeaderController" ng-init="getFlightData()" ng-keyup="$event.keyCode == 13 && getFlightData()">
                     <div class="title">
                         <div class="pull-right">
                             <button 
@@ -52,7 +53,13 @@
                                                 <span ng-bind-html="airline.name | highlight: $select.search"></span>
                                             </ui-select-choices>
                                         </ui-select>
-                                        <input type="text" placeholder="1234" class="form-control text-right" style="width: 33%; border-left: 0;" />
+                                        <input 
+                                            type="text" 
+                                            placeholder="1234" 
+                                            class="form-control text-right" 
+                                            style="width: 33%; border-left: 0;"
+                                            ng-model="leg.flight"
+                                            />
                                     </div>
                                 </div>
                                 <div
@@ -81,7 +88,7 @@
                         <div class="action row">
                             <div class="col col-md-12 text-center">
                                 <button class="btn btn-link" ng-click="create();" ng-hide="hasMaxLegs()"><span class="fa fa-plus"></span> Add Leg</button>
-                                <button class="btn btn-success"><span class="fa fa-calculator"></span> Calculate Compensation</button>
+                                <button class="btn btn-success" ng-click="getFlightData();"><span class="fa fa-calculator"></span> Calculate Compensation</button>
                             </div>
                         </div>
                     </div>

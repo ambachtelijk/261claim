@@ -1,6 +1,7 @@
 "use strict"
 var HttpError = require('http-errors');
 var Path = require('path');
+var Airline = app.db.import(Path.join(app.basedir, app.config.path.model, 'Airline'));
 
 module.exports = ApiController.extend({
     searchAction: function(resolve, reject, key, value) {
@@ -9,7 +10,6 @@ module.exports = ApiController.extend({
             //throw new HttpError(400, 'Request did not match expected formatting, e.g. country/search/name/Netherlands');
         }
         
-        let Airline = app.db.import(Path.join(app.basedir, app.config.path.model, 'Airline'));
         
         // Compose query
         let where = {};

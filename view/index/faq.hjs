@@ -1,77 +1,72 @@
-<!--[[> header]]
--->
 <section class="main-section container">
     <div class="row" id="user-steps">
-      <h2> Frequently asked questions </h2>
-      <br><h4> How does it work?:</h4>
-            <div class="col-md-4">
-                <h3 class="text-center">Step 1: Input your details</h3>
-                <p style="font-size: 1.2em; text-align: justify;">Input your flight number and date in the boxes above:</p>
-                <img id="img_step1" src="/images/step1.png" />
-            </div>
-            <div class="col-md-4">
-                <h3 class="text-center">Step 2: Calculate your refund</h3>
-                <p style="font-size: 1.2em;text-align: justify;">Check your details and complete the necessary information:</p>
-                <img id="img_step2" src="/images/step2.png" />
-            </div>
-            <div class="col-md-4">
-                <h3 class="text-center">Step 3: File your claim</h3>
-                <p style="font-size: 1.2em;text-align: justify;">File your claim:</p>
-                <img id="img_step3" src="/images/step3.png" />
-            </div>
+        <div class="col col-md-12">
+            <h1> Frequently asked questions </h1>
+            <h3> How does it work?:</h3>
+        </div>
+        <div class="col-md-4">
+            <h3 class="text-center">Step 1: Input your details</h3>
+            <p style="font-size: 1.2em; text-align: justify;">Input your flight number and date in the boxes above:</p>
+            <img id="img_step1" src="/images/step1.png" />
+        </div>
+        <div class="col-md-4">
+            <h3 class="text-center">Step 2: Calculate your refund</h3>
+            <p style="font-size: 1.2em;text-align: justify;">Check your details and complete the necessary information:</p>
+            <img id="img_step2" src="/images/step2.png" />
+        </div>
+        <div class="col-md-4">
+            <h3 class="text-center">Step 3: File your claim</h3>
+            <p style="font-size: 1.2em;text-align: justify;">File your claim:</p>
+            <img id="img_step3" src="/images/step3.png" />
+        </div>
     </div>
 
     <div class="row" id="questions">
         <div class="col-md-12">
-            <h4>What is 261claim?</h4>
-            <p style="font-size: 1.2em;">
-              <strong>261claim.eu</strong> is proud to serve you when in need of professional help in case of flight delay or cancellation; of buggage delay or loss.
-              <br><br>We acknowledge how difficult and frustrating this situation can be;
-              and <strong>261claim</strong> always provides you with the best, first-of-its-kind, service to assure you that <strong>everything is going to be alright</strong>.
-              The <strong>261claim</strong> team is dedicated in quiding you through the process of claiming the compensation you deserve.
-              Our goal is to provide you with the best service in your hour of need.
-              <br><br>We offer <strong>free of charge service</strong> for checking whether you are elligible for a compensation.
-              And we charge only a minor fee in case you decide to<strong> claim your refund</strong>.
+            <h3>What is 261claim?</h3>
+            <p>
+                <strong>261claim.eu</strong> is proud to serve you when in need of professional help in case of flight delay or cancellation; of baggage delay or loss.
+                We acknowledge how difficult and frustrating this situation can be;
+                and <strong>261claim</strong> always provides you with the best, first-of-its-kind, service to assure you that <strong>everything is going to be alright</strong>.
+                The <strong>261claim</strong> team is dedicated in quiding you through the process of claiming the compensation you deserve.
+                Our goal is to provide you with the best service in your hour of need.
             </p>
-        </div>
-        <div class="col-md-12">
-            <h4>How long does it take to file my claim?</h4>
-            <p style="font-size: 1.2em;">
-              The 261claim process takes about <strong>2-3 minutes</strong>.
+            <p>
+                We offer <strong>free of charge service</strong> for checking whether you are elligible for a compensation.
+                And we charge only a minor fee in case you decide to<strong> claim your refund</strong>.
             </p>
-        </div>
-        <div class="col-md-12">
-            <h4>Do you charge for checking my reimbursement?</h4>
-            <p style="font-size: 1.2em;">
-              <strong>No</strong>, it is absolutely free to ckeck whether you are elligile for a compensation
+            <h3>How long does it take to file my claim?</h3>
+            <p>
+                The 261claim process takes about <strong>2-3 minutes</strong>.
             </p>
-        </div>
-        <div class="col-md-12">
-            <h4>What is your fee?</h4>
-            <p style="font-size: 1.2em;">
-              Our is fee is only <strong>5%</strong> of your claimed refund.
+            
+            <h3>Do you charge for checking my reimbursement?</h3>
+            <p>
+                <strong>No</strong>, it is absolutely free to ckeck whether you are elligile for a compensation
             </p>
-        </div>
-        <div class="col-md-12">
-            <h4>How long does it take to receive my refund?</h4>
-            <p style="font-size: 1.2em;">
-              Your claim is <strong>immediately submitted</strong>.
-              <br>Your refund takes from <strong>1-5 working days</strong> to be approved.
-              <br>The transfer takes <strong>1-3 working days</strong> to be received.
+            <h3>What is your fee?</h3>
+            <p>
+                Our is fee is only <strong>5%</strong> of your claimed refund.
+            </p>
+            <h3>How long does it take to receive my refund?</h3>
+            <p>
+                Your claim is <strong>immediately submitted</strong>.
+                <br/>Depending or your airline, it can take up to <strong>6 weeks</strong> to process your claim.
+                <br/>The transfer takes <strong>1-3 working days</strong> to be received.
             </p>
         </div>
     </div>
 
-    <div class="row" id="short-titles" style="margin-top:5%;">
-            <div class="col-md-4">
-                <h3 class="text-center"><strong>Easy and fast calculation of compensation.</strong></h3>
-            </div>
-            <div class="col-md-4">
-                <h3 class="text-center"><strong>No knowledge needed.<br />No hussle.</strong></h3>
-            </div>
-            <div class="col-md-4">
-                <h3 class="text-center"><strong>Reliable and effective personalized service.</strong></h3>
-            </div>
+    <div class="row" id="short-titles" style="margin-top: 2em;">
+        <div class="col-md-4">
+            <h3 class="text-center"><strong>Easy and fast calculation of compensation.</strong></h3>
+        </div>
+        <div class="col-md-4">
+            <h3 class="text-center"><strong>No knowledge needed.<br />No hussle.</strong></h3>
+        </div>
+        <div class="col-md-4">
+            <h3 class="text-center"><strong>Reliable and effective personalized service.</strong></h3>
+        </div>
     </div>
 
 </section>
