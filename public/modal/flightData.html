@@ -9,11 +9,21 @@
         <h3 style="margin-top: 0;"><span ng-bind-html="leg.airline.iata + ' ' + leg.flight"></span> <small ng-bind-html="leg.airline.name"></small></h3>
         <h4>{{leg.date | amDateFormat: 'dddd, DD MMM YYYY'}}</h4>
         <div ng-hide="leg.flights !== null" class="text-center"><span class="fa fa-lg fa-fw fa-spinner fa-pulse"></span></div>
-        <div ng-show="leg.flights === false" class="text-center"><em>No matching flights found</em></div>
-        <div class="checkbox checkbox-success" style="margin: 0 0 0 5px;">
+        
+        
+        <div ng-show="leg.flights === false">
+            <p class="text-center"><em>No matching flights found</em></p>
+        </div>
+        
+        <div ng-hide="leg.flights === null" class="checkbox checkbox-success" style="margin: 0 0 0 5px;">
             <input type="radio" name="{{$index}}" ng-checked="{{$first}}" id="{{$index}}}" />
             <label for="{{$index}}}">Don't use this leg</label>
         </div>
+        <div ng-show="leg.flights === false" class="checkbox checkbox-success" style="margin: 0 0 0 5px;">
+            <input type="radio" name="{{$index}}" checked id="man-{{$index}}}" />
+            <label for="man-{{$index}}}">Manually enter flight data</label>
+        </div>
+        
         <div class="">
         <table class="table table-condensed table-hover" ng-repeat="flight in leg.flights">
             <thead>

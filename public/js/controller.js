@@ -121,56 +121,7 @@ app.controller('IndexHeaderController', function($scope, $http, $element, $windo
     $scope.yesterday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
     $scope.yesterday.setDate($scope.yesterday.getDate() - 1);
     $scope.legs = [];
-    /*$scope.legs = [
-  {
-    "date": new Date(today.getFullYear(), today.getMonth(), today.getDate()-2),
-    "airline": {
-      "id": 37,
-      "iata": "SU",
-      "icao": "AFL",
-      "name": "Aeroflot Russian Airlines",
-      "matchedBy": "IATA"
-    },
-    "flight": "2168"
-  },
-  {
-    "date": new Date(today.getFullYear(), today.getMonth(), today.getDate()-2),
-    "airline": {
-      "id": 37,
-      "iata": "SU",
-      "icao": "AFL",
-      "name": "Aeroflot Russian Airlines",
-      "matchedBy": "IATA"
-    },
-    "flight": "9999",
-    "flights": false
-  }
-];*/
-   $scope.legs = [
-  {
-    "date": new Date(today.getFullYear(), today.getMonth(), today.getDate()-2),
-    "airline": {
-      "id": 37,
-      "iata": "SU",
-      "icao": "AFL",
-      "name": "Aeroflot Russian Airlines",
-      "matchedBy": "IATA"
-    },
-    "flight": "2168"
-  },
-  {
-    "date": new Date(today.getFullYear(), today.getMonth(), today.getDate()-1),
-    "airline": {
-      "id": 37,
-      "iata": "TK",
-      "icao": "THY",
-      "name": "Turkish Airlines",
-      "matchedBy": "IATA"
-    },
-    "flight": "335",
-    "flights": false
-  }
-];
+    
     
     
     // This property needs to be in a method, otherwise it does not get updated

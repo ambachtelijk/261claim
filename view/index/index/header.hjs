@@ -3,8 +3,8 @@
         <h1 class="text-center">Cancelled or delayed flight?<!--br/><small>- or -</small><br/>Lost or delayed luggage?--></h1>
         <div class="row">
             <div class="col col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-                <!--div class="box" ng-controller="IndexHeaderController" ng-init="create();" ng-keyup="$event.keyCode == 13 && getFlightData()"-->
-                <div class="box" ng-controller="IndexHeaderController" ng-init="getFlightData()" ng-keyup="$event.keyCode == 13 && getFlightData()">
+                <div class="box" ng-controller="IndexHeaderController" ng-init="create();" ng-keyup="$event.keyCode == 13 && getFlightData()">
+                <!--div class="box" ng-controller="IndexHeaderController" ng-init="getFlightData()" ng-keyup="$event.keyCode == 13 && getFlightData()"-->
                     <div class="title">
                         <div class="pull-right">
                             <button 
