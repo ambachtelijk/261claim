@@ -19,13 +19,13 @@
             <input type="radio" name="{{$index}}" ng-checked="{{$first}}" id="{{$index}}}" />
             <label for="{{$index}}}">Don't use this leg</label>
         </div>
-        <div ng-show="leg.flights === false" class="checkbox checkbox-success" style="margin: 0 0 0 5px;">
+        
+        <div ng-show="leg.flights === false" class="checkbox checkbox-success" style="margin: 5px 0 0 5px; ">
             <input type="radio" name="{{$index}}" checked id="man-{{$index}}}" />
             <label for="man-{{$index}}}">Manually enter flight data</label>
         </div>
         
-        <div class="">
-        <table class="table table-condensed table-hover" ng-repeat="flight in leg.flights">
+        <table class="table table-condensed table-hover" ng-repeat="flight in leg.flights" ng-style="{ 'margin-bottom': $last ? 0 : inherit } ">
             <thead>
                 <tr>
                     <th class="text-nowrap">
@@ -70,7 +70,7 @@
                 </tr>
             </tbody>
         </table>
-        </div>
+        <hr ng-hide="$last" />
     </div>
     <div ng-if="legsModal.length === 0" class="text-center"><em>No flights entered is search field</em></div>
 </div>
