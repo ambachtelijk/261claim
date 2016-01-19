@@ -1,39 +1,66 @@
 <div class="modal-header">
     <h3 class="modal-title" ng-hide="loadedLegs"><span class="fa fa-fw fa-spinner fa-pulse"></span> Searching flights...</h3>
     <h3 class="modal-title" ng-show="loadedLegs">Select your flights</h3>
+    <span>This information is indicative, you can modify it in the next screen.</span> 
 </div>
 <div class="modal-body">
     <!--pre>{{legs | json}}</pre-->
     <div ng-repeat="leg in legsModal">
-        <h3><span ng-bind-html="leg.airline.iata + ' ' + leg.flight"></span> <small ng-bind-html="leg.airline.name"></small></h3>
+        <h3 style="margin-top: 0;"><span ng-bind-html="leg.airline.iata + ' ' + leg.flight"></span> <small ng-bind-html="leg.airline.name"></small></h3>
+        <h4>{{leg.date | amDateFormat: 'dddd, DD MMM YYYY'}}</h4>
         <div ng-hide="leg.flights !== null" class="text-center"><span class="fa fa-lg fa-fw fa-spinner fa-pulse"></span></div>
         <div ng-show="leg.flights === false" class="text-center"><em>No matching flights found</em></div>
-        <table class="table table-responsive" ng-repeat="flight in leg.flights">
+        <div class="checkbox checkbox-success" style="margin: 0 0 0 5px;">
+            <input type="radio" name="{{$index}}" ng-checked="{{$first}}" id="{{$index}}}" />
+            <label for="{{$index}}}">Don't use this leg</label>
+        </div>
+        <div class="">
+        <table class="table table-condensed table-hover" ng-repeat="flight in leg.flights">
             <thead>
                 <tr>
-                    <th></th>
-                    <th><h4>{{flight.origin.iata}} <small>(<span ng-bind-html="flight.origin.name"></span>)</small></h4></th>
-                    <th><h4>{{flight.destination.iata}} <small>(<span ng-bind-html="flight.destination.name"></span>)</small></h4></th>
+                    <th class="text-nowrap">
+                        <div class="checkbox checkbox-success" style="margin: 0;">
+                            <input type="radio" name="{{$parent.$index}}" ng-checked="{{$first}}" id="{{$parent.$index}}-{{$index}}}" />
+                            <label for="{{$parent.$index}}-{{$index}}}">Select flight</label>
+                        </div>
+                    </th>
+                    <th style="width: 50%" class="text-center">
+                        <span style="margin: 0;">{{flight.origin.iata}} <small class="hidden-xxs">(<span ng-bind-html="flight.origin.name"></span>)</small></h4>
+                    </th>
+                    <th style="width: 50%" class="text-center">
+                        <span style="margin: 0;">{{flight.destination.iata}} <small class="hidden-xxs">(<span ng-bind-html="flight.destination.name"></span>)</small></h4>
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Planned</td>
-                    <td>{{flight.departure}}</td>
-                    <td>{{flight.arrival}}</td>
+                    <td class="text-center">{{flight.departure | amTimezone: flight.origin.timezone | amDateFormat: 'HH:mm z'}}</td>
+                    <td class="text-center">{{flight.arrival | amTimezone: flight.destination.timezone | amDateFormat: 'HH:mm z'}}</td>
                 </tr>
                 <tr>
                     <td>Actual</td>
-                    <td>{{flight.actualDeparture}}</td>
-                    <td>{{flight.actualArrival}}</td>
+                    <td class="text-center">
+                        <span ng-show="flight.actualDeparture">{{flight.actualDeparture | amTimezone: flight.origin.timezone | amDateFormat: 'HH:mm z'}}</span>
+                        <span ng-hide="flight.actualDeparture"><em>Cancelled</em></span>
+                    </td>
+                    <td class="text-center">
+                        <span ng-show="flight.actualArrival">{{flight.actualArrival | amTimezone: flight.destination.timezone | amDateFormat: 'HH:mm z'}}</span>
+                        <span ng-hide="flight.actualArrival"><em>Cancelled</em></span>
+                    </td>
                 </tr>
-                <tr>
-                    <td>Difference</td>
-                    <td>{{(flight.diff.departure.hours % 24) | number}} hours and {{(flight.diff.departure.minutes % 60) | number}} minutes</td>
-                    <td>{{(flight.diff.arrival.hours % 24) | number}} hours and {{(flight.diff.arrival.minutes % 60) | number}} minutes</td>
+                <tr ng-hide="!flight.diff.arrival">
+                    <td>Delay</td>
+                    <td class="text-center">
+                        <span ng-show="flight.diff.departure.h > 0">{{(flight.diff.departure.h) | number}}h,</span> {{(flight.diff.departure.min % 60) | number}} min
+                    </td>
+                    <td class="text-center">
+                        <span ng-show="flight.diff.arrival.h > 0">{{(flight.diff.arrival.h) | number}}h,</span> {{(flight.diff.arrival.min % 60) | number}} min
+                    </td>
                 </tr>
             </tbody>
         </table>
+        </div>
     </div>
     <div ng-if="legsModal.length === 0" class="text-center"><em>No flights entered is search field</em></div>
 </div>

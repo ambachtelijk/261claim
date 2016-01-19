@@ -20,30 +20,60 @@
 }
 
 /**
- * Intermediate breakpoint for visibility. Is missing in Bootstrap 3
- */
-.hidden-ms {
+ * XXS breakpoint for visibility. Is missing in Bootstrap 3
+ *//*
+.test {
+    width: ~`console.log("@{min-xs-width}"), '3px';
+}*/
+.hidden-xxs {
+  @media (max-width: (@screen-xs-min - 1)) {
+    .responsive-invisibility();
+  }
+}
+
+.visible-xxs {
+  @media (max-width: (@screen-xs-min - 1)) {
+    .responsive-visibility();
+  }
+}
+.visible-xxs-block {
+  @media (max-width: (@screen-xs-min - 1)) {
+    display: block !important;
+  }
+}
+.visible-xxs-inline {
+  @media (max-width: (@screen-xs-min - 1)) {
+    display: inline !important;
+  }
+}
+.visible-xxs-inline-block {
+  @media (max-width: (@screen-xs-min - 1)) {
+    display: inline-block !important;
+  }
+}
+
+.hidden-xs {
   @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
     .responsive-invisibility();
   }
 }
 
-.visible-ms {
+.visible-xs {
   @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
     .responsive-visibility();
   }
 }
-.visible-ms-block {
+.visible-xs-block {
   @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
     display: block !important;
   }
 }
-.visible-ms-inline {
+.visible-xs-inline {
   @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
     display: inline !important;
   }
 }
-.visible-ms-inline-block {
+.visible-xs-inline-block {
   @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
     display: inline-block !important;
   }

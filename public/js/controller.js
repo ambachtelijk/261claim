@@ -118,9 +118,10 @@ app.controller('UserModalController', function($scope, $uibModalInstance, AuthSe
 app.controller('IndexHeaderController', function($scope, $http, $element, $window, $uibModal) {
     // Circumvent bug in Angular that prevents propagation if date is not defined as new Date(yyyy, MM, dd)
     var today = new Date();
-    $scope.today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    $scope.yesterday = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    $scope.yesterday.setDate($scope.yesterday.getDate() - 1);
     $scope.legs = [];
- /*   $scope.legs = [
+    /*$scope.legs = [
   {
     "date": new Date(today.getFullYear(), today.getMonth(), today.getDate()-2),
     "airline": {
@@ -144,8 +145,33 @@ app.controller('IndexHeaderController', function($scope, $http, $element, $windo
     "flight": "9999",
     "flights": false
   }
+];*/
+   $scope.legs = [
+  {
+    "date": new Date(today.getFullYear(), today.getMonth(), today.getDate()-2),
+    "airline": {
+      "id": 37,
+      "iata": "SU",
+      "icao": "AFL",
+      "name": "Aeroflot Russian Airlines",
+      "matchedBy": "IATA"
+    },
+    "flight": "2168"
+  },
+  {
+    "date": new Date(today.getFullYear(), today.getMonth(), today.getDate()-1),
+    "airline": {
+      "id": 37,
+      "iata": "TK",
+      "icao": "THY",
+      "name": "Turkish Airlines",
+      "matchedBy": "IATA"
+    },
+    "flight": "335",
+    "flights": false
+  }
 ];
-    */
+    
     
     // This property needs to be in a method, otherwise it does not get updated
     $scope.hasMaxLegs = function() { return !($scope.legs.length < 5); };
@@ -157,7 +183,7 @@ app.controller('IndexHeaderController', function($scope, $http, $element, $windo
                 date: $scope.legs[$scope.legs.length - 1].date,
                 airline: $scope.legs[$scope.legs.length - 1].airline
             } : {
-                date: $scope.today
+                date: $scope.yesterday
             });
 
             // Make sure the appropriate classes are added

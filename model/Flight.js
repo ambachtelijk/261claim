@@ -6,24 +6,24 @@ module.exports = function(flight) {
         aircraft: flight.aircrafttype,
         airline: null,
         setAirports: function(airports) {
-            this.departure =        Moment(flight.filed_departuretime, 'X').tz(airports[flight.origin].timezone);
-            this.actualDeparture =  Moment(flight.actualdeparturetime, 'X').tz(airports[flight.origin].timezone);
-            this.arrival =          Moment(flight.estimatedarrivaltime, 'X').tz(airports[flight.destination].timezone);
-            this.actualArrival =    Moment(flight.actualarrivaltime, 'X').tz(airports[flight.destination].timezone);
+            this.departure =        flight.filed_departuretime !== -1 ? Moment(flight.filed_departuretime, 'X').tz(airports[flight.origin].timezone) : null;
+            this.actualDeparture =  flight.actualdeparturetime !== -1 ? Moment(flight.actualdeparturetime, 'X').tz(airports[flight.origin].timezone) : null;
+            this.arrival =          flight.filed_ete !== -1 ? Moment(this.departure).add(Moment.duration(flight.filed_ete)).tz(airports[flight.destination].timezone) : null;
+            this.actualArrival =    flight.actualarrivaltime !== -1 ? Moment(flight.actualarrivaltime, 'X').tz(airports[flight.destination].timezone) : null;
             
             this.diff = {
-                arrival: {
-                    days: this.actualArrival.diff(this.arrival, 'days'),
-                    hours: this.actualArrival.diff(this.arrival, 'hours'),
-                    minutes: this.actualArrival.diff(this.arrival, 'minutes'),
-                    seconds: this.actualArrival.diff(this.arrival, 'seconds')
-                },
-                departure: {
-                    days: this.actualDeparture.diff(this.departure, 'days'),
-                    hours: this.actualDeparture.diff(this.departure, 'hours'),
-                    minutes: this.actualDeparture.diff(this.departure, 'minutes'),
-                    seconds: this.actualDeparture.diff(this.departure, 'seconds')
-                }
+                arrival: this.actualArrival && this.arrival ? {
+                    d: this.actualArrival.diff(this.arrival, 'days'),
+                    h: this.actualArrival.diff(this.arrival, 'hours'),
+                    min: this.actualArrival.diff(this.arrival, 'minutes'),
+                    s: this.actualArrival.diff(this.arrival, 'seconds')
+                } : null,
+                departure: this.actualDeparture && this.departure ? {
+                    d: this.actualDeparture.diff(this.departure, 'days'),
+                    h: this.actualDeparture.diff(this.departure, 'hours'),
+                    min: this.actualDeparture.diff(this.departure, 'minutes'),
+                    s: this.actualDeparture.diff(this.departure, 'seconds')
+                } : null
             };
             
             this.origin =           airports[flight.origin];

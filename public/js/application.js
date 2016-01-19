@@ -1,5 +1,5 @@
 "use strict"
-var app = angular.module('app', ['ui.bootstrap', 'ui.select', 'ngSanitize', 'ngMessages']);
+var app = angular.module('app', ['ui.bootstrap', 'ui.select', 'ngSanitize', 'ngMessages', 'angularMoment']);
 
 app.config(function(uiSelectConfig) {
     uiSelectConfig.theme = 'bootstrap';

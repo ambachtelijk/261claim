@@ -17,10 +17,10 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right" ng-show="user.model && user.model.length !== 0">
-                <li><a href="#" rel="nofollow"><span class="fa fa-fw fa-lg fa-plane"></span><span class="hidden-ms">&nbsp;Manage Claims</sm></a></li>
-                <li><a href="#" rel="nofollow"><span class="fa fa-fw fa-lg fa-commenting"></span><span class="hidden-ms">&nbsp;Messages <span class="badge">0</span></span></a></li>
+                <li><a href="#" rel="nofollow"><span class="fa fa-fw fa-lg fa-plane"></span><span class="hidden-xs">&nbsp;Manage Claims</sm></a></li>
+                <li><a href="#" rel="nofollow"><span class="fa fa-fw fa-lg fa-commenting"></span><span class="hidden-xs">&nbsp;Messages <span class="badge">0</span></span></a></li>
                 <li uib-dropdown>
-                    <a uib-dropdown-toggle id="nav-user-menu" href="#" rel="nofollow"><span class="fa fa-fw fa-lg fa-user"></span><span class="hidden-ms hidden-sm">&nbsp;{{user.model.email}}</span> <span class="caret"></span></a>
+                    <a uib-dropdown-toggle id="nav-user-menu" href="#" rel="nofollow"><span class="fa fa-fw fa-lg fa-user"></span><span class="hidden-xs hidden-sm">&nbsp;{{user.model.email}}</span> <span class="caret"></span></a>
                     <ul uib-dropdown-menu aria-labelledby="nav-user-menu" role="menu">
                         <li><a href="/admin" rel="nofollow"><span class="fa fa-fw fa-area-chart"></span>&nbsp;&nbsp;Admin</a></li>
                         <li><a href="/user/settings" rel="nofollow"><span class="fa fa-fw fa-cogs"></span>&nbsp;&nbsp;Settings</a></li>

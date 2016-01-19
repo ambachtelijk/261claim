@@ -10,7 +10,7 @@ var Flight = require(Path.join(app.basedir, app.config.path.model, 'Flight'));
 
 module.exports = ApiController.extend({
     searchAction: function(resolve, reject) {
-        Restler.get(process.env.FXML_HOST + 'FlightInfo', {
+        Restler.get(process.env.FXML_HOST + 'FlightInfoEx', {
             username: process.env.FXML_USER,
             password: process.env.FXML_PASS,
             query: {
@@ -19,10 +19,10 @@ module.exports = ApiController.extend({
             }
         })
         .on('success', function (response) {
-            if(response.FlightInfoResult === undefined) {
+            if(response.FlightInfoExResult === undefined) {
                 return reject(new HttpError(404, 'No flights found'));
             }
-            
+            console.log(response.FlightInfoExResult);
             // Start a promise chain
             var scope = {};
             Promise
@@ -30,7 +30,7 @@ module.exports = ApiController.extend({
                 .try(function () {
                     // Get the airports to combine with the API results
                     var airports = [];
-                    response.FlightInfoResult.flights.forEach(function(flight) {
+                    response.FlightInfoExResult.flights.forEach(function(flight) {
                         if(airports.indexOf(flight.origin) === -1) { airports.push(flight.origin); }
                         if(airports.indexOf(flight.destination) === -1) { airports.push(flight.destination); }
                     });
@@ -54,7 +54,7 @@ module.exports = ApiController.extend({
                 
                 // Construct the flight object
                 .then(function() {
-                    response.FlightInfoResult.flights.forEach(function(f) {
+                    response.FlightInfoExResult.flights.forEach(function(f) {
                         var flight = new Flight(f);
                         flight.setAirports(scope.airports);
                         flight.setAirline(scope.airline);
