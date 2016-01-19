@@ -15,12 +15,12 @@
             <p class="text-center"><em>No matching flights found</em></p>
         </div>
         
-        <div ng-hide="leg.flights === null" class="checkbox checkbox-success" style="margin: 0 0 0 5px;">
-            <input type="radio" name="{{$index}}" ng-checked="{{$first}}" id="{{$index}}}" />
+        <div ng-hide="leg.flights === null" class="checkbox checkbox-primary" style="margin: 0 0 0 5px;">
+            <input type="radio" name="{{$index}}" id="{{$index}}}" />
             <label for="{{$index}}}">Don't use this leg</label>
         </div>
         
-        <div ng-show="leg.flights === false" class="checkbox checkbox-success" style="margin: 5px 0 0 5px; ">
+        <div ng-show="leg.flights === false" class="checkbox checkbox-primary" style="margin: 5px 0 0 5px; ">
             <input type="radio" name="{{$index}}" checked id="man-{{$index}}}" />
             <label for="man-{{$index}}}">Manually enter flight data</label>
         </div>
@@ -29,7 +29,7 @@
             <thead>
                 <tr>
                     <th class="text-nowrap">
-                        <div class="checkbox checkbox-success" style="margin: 0;">
+                        <div class="checkbox checkbox-primary" style="margin: 0;">
                             <input type="radio" name="{{$parent.$index}}" ng-checked="{{$first}}" id="{{$parent.$index}}-{{$index}}}" />
                             <label for="{{$parent.$index}}-{{$index}}}">Select flight</label>
                         </div>

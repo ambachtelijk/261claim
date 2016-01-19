@@ -47,6 +47,7 @@
                                                 group-by="'matchedBy'"
                                                 refresh="getAirlines($select.search)"
                                                 refresh-delay="0"
+                                                position="down"
                                                 >
                                                 <kbd ng-bind-html="airline.iata | highlight: $select.search" style="font-size: 16px;"></kbd>
                                                 &nbsp;
