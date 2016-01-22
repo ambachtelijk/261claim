@@ -170,7 +170,7 @@
       </div>
       <table class="table">
         <tr>
-          <td>Ticket DME - AMS</td>
+          <td>Ticket GYD - IST</td>
           <td class="text-right text-nowrap">&euro; 89,00</td>
         </tr>
         
@@ -190,5 +190,6 @@
         </tr>
       </table>
     </div>
+    <button class="btn btn-success pull-right">Save & Next &raquo;</button>
   </div>
 </div>
