@@ -16,21 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `air`
---
-
-DROP TABLE IF EXISTS `air`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `air` (
-  `iata` varchar(255) NOT NULL,
-  `icao` varchar(255) NOT NULL,
-  `wiki` varchar(255) NOT NULL,
-  `alt_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
 -- Table structure for table `airline`
 --
 
@@ -109,6 +94,40 @@ CREATE TABLE `country` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `flight`
+--
+
+DROP TABLE IF EXISTS `flight`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `flight` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `fxml_id` varchar(32) DEFAULT NULL,
+  `departure` datetime DEFAULT NULL,
+  `arrival` datetime DEFAULT NULL,
+  `actualDeparture` datetime DEFAULT NULL,
+  `actualArrival` datetime DEFAULT NULL,
+  `origin` char(4) DEFAULT NULL,
+  `destination` char(4) DEFAULT NULL,
+  `distance` int(11) DEFAULT NULL,
+  `airline` char(3) DEFAULT NULL,
+  `aircraft` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `fxml_id` (`fxml_id`),
+  KEY `origin` (`origin`),
+  KEY `destination` (`destination`),
+  KEY `departure` (`departure`),
+  KEY `arrival` (`arrival`),
+  KEY `actualDeparture` (`actualDeparture`),
+  KEY `actualArrival` (`actualArrival`),
+  KEY `airline` (`airline`),
+  CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`origin`) REFERENCES `airport` (`icao`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `flight_ibfk_4` FOREIGN KEY (`destination`) REFERENCES `airport` (`icao`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `flight_ibfk_5` FOREIGN KEY (`airline`) REFERENCES `airline` (`icao`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `user`
 --
 
@@ -116,13 +135,51 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   KEY `password` (`password`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `user_claim`
+--
+
+DROP TABLE IF EXISTS `user_claim`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_claim` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `agency` varchar(64) DEFAULT NULL,
+  `reference` varchar(16) DEFAULT NULL,
+  `traveller` varchar(64) DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`),
+  CONSTRAINT `user_claim_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `user_claim_flight`
+--
+
+DROP TABLE IF EXISTS `user_claim_flight`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_claim_flight` (
+  `user_itinerary_id` int(10) unsigned NOT NULL,
+  `flight_id` int(10) unsigned NOT NULL,
+  UNIQUE KEY `user_itinerary_id` (`user_itinerary_id`,`flight_id`),
+  KEY `user_itinerary_id_2` (`user_itinerary_id`),
+  KEY `flight_id` (`flight_id`),
+  CONSTRAINT `user_claim_flight_ibfk_2` FOREIGN KEY (`flight_id`) REFERENCES `flight` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `user_claim_flight_ibfk_1` FOREIGN KEY (`user_itinerary_id`) REFERENCES `user_claim` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -134,4 +191,4 @@ CREATE TABLE `user` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-18 19:42:27
+-- Dump completed on 2016-01-22 12:56:06

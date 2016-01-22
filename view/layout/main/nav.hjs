@@ -1,34 +1,34 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/"><img src="/media/logo-261claim.png" /></a>
-            <button type="button" class="navbar-toggle btn-link" data-toggle="collapse" data-target=".navbar-collapse" ng-init="collapsed = true" ng-click="collapsed = !collapsed;">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="fa fa-fw fa-lg fa-bars"></span>
-            </button>
-        </div>
-        <div uib-collapse="collapsed" class="collapse navbar-collapse" ng-controller="UserController">
-            <ul class="nav navbar-nav navbar-right" ng-show="!user.model || user.model.length === 0">
-                <li>
-                    <div class="navbar-btn"><button class="btn btn-link" ng-click="signIn()"><span class="fa fa-fw fa-sign-in"></span>&nbsp;&nbsp;Sign in</button></div>
-                </li>
-                <li>
-                    <div class="navbar-btn"><button class="btn btn-primary" ng-click="signUp()">Sign up</button></div>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right" ng-show="user.model && user.model.length !== 0">
-                <li><a href="#" rel="nofollow"><span class="fa fa-fw fa-lg fa-plane"></span><span class="hidden-xs">&nbsp;Manage Claims</sm></a></li>
-                <li><a href="#" rel="nofollow"><span class="fa fa-fw fa-lg fa-commenting"></span><span class="hidden-xs">&nbsp;Messages <span class="badge">0</span></span></a></li>
-                <li uib-dropdown>
-                    <a uib-dropdown-toggle id="nav-user-menu" href="#" rel="nofollow"><span class="fa fa-fw fa-lg fa-user"></span><span class="hidden-xs hidden-sm">&nbsp;{{user.model.email}}</span> <span class="caret"></span></a>
-                    <ul uib-dropdown-menu aria-labelledby="nav-user-menu" role="menu">
-                        <li><a href="/admin" rel="nofollow"><span class="fa fa-fw fa-area-chart"></span>&nbsp;&nbsp;Admin</a></li>
-                        <li><a href="/user/settings" rel="nofollow"><span class="fa fa-fw fa-cogs"></span>&nbsp;&nbsp;Settings</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#" ng-click="signOut()" rel="nofollow"><span class="fa fa-fw fa-sign-out"></span>&nbsp;&nbsp;Sign out</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/"><img src="/media/logo-261claim.png" /></a>
+      <button type="button" class="navbar-toggle btn-link" data-toggle="collapse" data-target=".navbar-collapse" ng-init="collapsed = true" ng-click="collapsed = !collapsed;">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="fa fa-fw fa-lg fa-bars"></span>
+      </button>
     </div>
+    <div uib-collapse="collapsed" class="collapse navbar-collapse" ng-controller="UserController">
+      <ul class="nav navbar-nav navbar-right" ng-show="!user.model || !user.model.id">
+        <li>
+          <div class="navbar-btn"><button class="btn btn-link" ng-click="$emit('userSignIn')"><span class="fa fa-fw fa-sign-in"></span>&nbsp;&nbsp;Sign in</button></div>
+        </li>
+        <li>
+          <div class="navbar-btn"><button class="btn btn-primary" ng-click="$emit('userSignUp')">Sign up</button></div>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" ng-show="user.model && user.model.id">
+        <li><a href="/user/claim" rel="nofollow"><span class="fa fa-fw fa-lg fa-plane"></span><span class="hidden-xs">&nbsp;Manage Claims</sm></a></li>
+        <li><a href="/user/message" rel="nofollow"><span class="fa fa-fw fa-lg fa-commenting"></span><span class="hidden-xs">&nbsp;Messages <span class="badge">0</span></span></a></li>
+        <li uib-dropdown>
+          <a uib-dropdown-toggle id="nav-user-menu" href="#" rel="nofollow"><span class="fa fa-fw fa-lg fa-user"></span><span class="hidden-xs hidden-sm">&nbsp;{{user.model.email}}</span> <span class="caret"></span></a>
+          <ul uib-dropdown-menu aria-labelledby="nav-user-menu" role="menu">
+            <li><a href="/admin" rel="nofollow"><span class="fa fa-fw fa-area-chart"></span>&nbsp;&nbsp;Admin</a></li>
+            <li><a href="/user/settings" rel="nofollow"><span class="fa fa-fw fa-cogs"></span>&nbsp;&nbsp;Settings</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" ng-click="$emit('userSignOut')" rel="nofollow"><span class="fa fa-fw fa-sign-out"></span>&nbsp;&nbsp;Sign out</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
 </nav>

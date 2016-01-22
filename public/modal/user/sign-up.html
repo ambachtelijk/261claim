@@ -1,107 +1,107 @@
 <div class="modal-header">
-    <h3 class="modal-title">Registration</h3>
-    <span>Already have an account? <a href="#" ng-click="cancel(); signIn();">Sign in now &raquo;</a></span>
+  <h3 class="modal-title">Registration</h3>
+  <span>Already have an account? <a href="#" ng-click="cancel(); $emit('userSignIn');">Sign in now &raquo;</a></span>
 </div>
 <div class="modal-body form-horizontal" ng-keyup="$event.keyCode == 13 && signUpValidate()">
-    <form name="userModalForm" novalidate>
-        <div class="alert alert-danger help-block" ng-show="userModalError">
-            <h4>An error occurred ({{userModalError.status}})</h4>
-            <p ng-bind-html="userModalError.message"></p>
+  <form name="userModalForm" novalidate>
+    <div class="alert alert-danger help-block" ng-show="userModalError">
+      <h4>An error occurred ({{userModalError.status}})</h4>
+      <p ng-bind-html="userModalError.message"></p>
+    </div>
+    <div class="form-group" ng-class="{'has-error': userModalForm.email.$touched && userModalForm.email.$invalid}">
+      <label class="col-sm-4 control-label" for="email">Email Address</label>
+      <div class="col-sm-8">
+        <div class="input-group">
+          <span class="input-group-addon"><span class="fa fa-fw fa-user"></span></span>
+          <input 
+            type="email" 
+            name="email"
+            ng-model="userModalModel.email"
+            class="form-control"
+            placeholder="Email Address"
+            required 
+            />
         </div>
-        <div class="form-group" ng-class="{'has-error': userModalForm.email.$touched && userModalForm.email.$invalid}">
-            <label class="col-sm-4 control-label" for="email">Email Address</label>
-            <div class="col-sm-8">
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="fa fa-fw fa-user"></span></span>
-                    <input 
-                        type="email" 
-                        name="email"
-                        ng-model="userModalModel.email"
-                        class="form-control"
-                        placeholder="Email Address"
-                        required 
-                        />
-                </div>
-                <div 
-                    ng-messages="userModalForm.email.$error" 
-                    ng-class="{ 'help-block': userModalForm.email.$touched && userModalForm.email.$invalid }"
-                    ng-show="(submitted || userModalForm.email.$touched) && userModalForm.email.$invalid"
-                    role="alert" 
-                    >
-                    <div ng-message="required">Email Address is a required field</div>
-                    <div ng-message="email">This is not a valid email address</div>
-                </div>
-            </div>
+        <div 
+          ng-messages="userModalForm.email.$error" 
+          ng-class="{ 'help-block': userModalForm.email.$touched && userModalForm.email.$invalid }"
+          ng-show="(submitted || userModalForm.email.$touched) && userModalForm.email.$invalid"
+          role="alert" 
+          >
+          <div ng-message="required">Email Address is a required field</div>
+          <div ng-message="email">This is not a valid email address</div>
         </div>
-        <div class="form-group" ng-class="{'has-error': userModalForm.password.$touched && userModalForm.password.$invalid}">
-            <label class="col-sm-4 control-label" for="password">Password</label>
-            <div class="col-sm-8">
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="fa fa-fw fa-lock"></span></span>
-                    <input 
-                        type="password" 
-                        name="password"
-                        ng-model="userModalModel.password"
-                        class="form-control"
-                        placeholder="Password"
-                        required 
-                        />
-                </div>
-                <div 
-                    ng-messages="userModalForm.password.$error" 
-                    ng-class="{ 'help-block': userModalForm.password.$touched && userModalForm.password.$invalid }"
-                    ng-show="(submitted || userModalForm.password.$touched) && userModalForm.password.$invalid"
-                    role="alert" 
-                    >
-                    <div ng-message="required">Password is a required field</div>
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': userModalForm.password.$touched && userModalForm.password.$invalid}">
+      <label class="col-sm-4 control-label" for="password">Password</label>
+      <div class="col-sm-8">
+        <div class="input-group">
+          <span class="input-group-addon"><span class="fa fa-fw fa-lock"></span></span>
+          <input 
+            type="password" 
+            name="password"
+            ng-model="userModalModel.password"
+            class="form-control"
+            placeholder="Password"
+            required 
+            />
         </div>
-        <div class="form-group" ng-class="{'has-error': userModalForm.password2.$touched && userModalForm.password2.$invalid}">
-            <label class="col-sm-4 control-label" for="password2">Confirm Password</label>
-            <div class="col-sm-8">
-                <div class="input-group">
-                    <span class="input-group-addon"><span class="fa fa-fw fa-repeat"></span></span>
-                    <input 
-                        type="password" 
-                        name="password2" 
-                        ng-model="userModalModel.password2"
-                        class="form-control"
-                        placeholder="Confirm Password"
-                        required
-                        compare-to="userModalModel.password"
-                        />
-                </div>
-                <div 
-                    ng-messages="userModalForm.password2.$error" 
-                    ng-class="{ 'help-block': userModalForm.password2.$touched && userModalForm.password2.$invalid }"
-                    ng-show="(submitted || userModalForm.password2.$touched) && userModalForm.password2.$invalid"
-                    role="alert" 
-                    >
-                    <div ng-message="required">Confirm Password is a required field</div>
-                    <div ng-message="compareTo">Confirm Password does not match Password</div>
-                </div>
-            </div>
+        <div 
+          ng-messages="userModalForm.password.$error" 
+          ng-class="{ 'help-block': userModalForm.password.$touched && userModalForm.password.$invalid }"
+          ng-show="(submitted || userModalForm.password.$touched) && userModalForm.password.$invalid"
+          role="alert" 
+          >
+          <div ng-message="required">Password is a required field</div>
         </div>
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-4" ng-class="{'has-error': userModalForm.agree.$touched && userModalForm.agree.$invalid}">
-                <div class="checkbox checkbox-primary">
-                    <input type="checkbox" value="agree" id="agree" name="agree" ng-model="userModalModel.agree" check-required />
-                    <label for="agree">I agree to the <a href="#">terms and conditions</a></label>
-                </div>
-                <div 
-                    ng-messages="userModalForm.agree.$error" 
-                    ng-class="{ 'help-block': userModalForm.agree.$touched && userModalForm.agree.$invalid }"
-                    ng-show="(submitted || userModalForm.agree.$touched) && userModalForm.agree.$invalid"
-                    role="alert" 
-                    >
-                    <div ng-message="checkRequired">Agree must be checked</div>
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="form-group" ng-class="{'has-error': userModalForm.password2.$touched && userModalForm.password2.$invalid}">
+      <label class="col-sm-4 control-label" for="password2">Confirm Password</label>
+      <div class="col-sm-8">
+        <div class="input-group">
+          <span class="input-group-addon"><span class="fa fa-fw fa-repeat"></span></span>
+          <input 
+            type="password" 
+            name="password2" 
+            ng-model="userModalModel.password2"
+            class="form-control"
+            placeholder="Confirm Password"
+            required
+            compare-to="userModalModel.password"
+            />
         </div>
-    </form>
+        <div 
+          ng-messages="userModalForm.password2.$error" 
+          ng-class="{ 'help-block': userModalForm.password2.$touched && userModalForm.password2.$invalid }"
+          ng-show="(submitted || userModalForm.password2.$touched) && userModalForm.password2.$invalid"
+          role="alert" 
+          >
+          <div ng-message="required">Confirm Password is a required field</div>
+          <div ng-message="compareTo">Confirm Password does not match Password</div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-4" ng-class="{'has-error': userModalForm.agree.$touched && userModalForm.agree.$invalid}">
+        <div class="checkbox checkbox-primary">
+          <input type="checkbox" value="agree" id="agree" name="agree" ng-model="userModalModel.agree" check-required />
+          <label for="agree">I agree to the <a href="#">terms and conditions</a></label>
+        </div>
+        <div 
+          ng-messages="userModalForm.agree.$error" 
+          ng-class="{ 'help-block': userModalForm.agree.$touched && userModalForm.agree.$invalid }"
+          ng-show="(submitted || userModalForm.agree.$touched) && userModalForm.agree.$invalid"
+          role="alert" 
+          >
+          <div ng-message="checkRequired">Agree must be checked</div>
+        </div>
+      </div>
+    </div>
+  </form>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-link" type="button" ng-click="cancel();">Cancel</button>
-    <button class="btn btn-primary" type="button" ng-click="signUpValidate();">Sign up</button>
+  <button class="btn btn-link" type="button" ng-click="cancel();">Cancel</button>
+  <button class="btn btn-primary" type="button" ng-click="signUpValidate();">Sign up</button>
 </div>

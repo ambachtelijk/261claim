@@ -1,0 +1,4 @@
+<div class="main-section container" ng-controller="UserClaimController" ng-init="action = 'create';">
+  <h1>Create Claim</h1>
+  [[> ../_form]]
+</div>

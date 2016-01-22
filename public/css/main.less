@@ -1,70 +1,70 @@
 body {
-    font-weight: @font-weight-base;
+  font-weight: @font-weight-base;
 }
 
 body > .navbar + .main-section {
-    padding-top: @navbar-height + 30px;
-    
-    @media (min-width: @screen-sm-min) {
-        padding-top: @navbar-height + 60px;
-    }
+  padding-top: @navbar-height + 30px;
+  
+  @media (min-width: @screen-sm-min) {
+    padding-top: @navbar-height + 60px;
+  }
 }
 
 nav a.navbar-brand img {
-    display: inline-block;
-    max-height: 100%;
-    margin: 0;
+  display: inline-block;
+  max-height: 100%;
+  margin: 0;
 
 }
 nav a.navbar-brand {
-    display: inline-block;
-    padding: 0;
+  display: inline-block;
+  padding: 0;
 }
 
 nav div.navbar-btn {
-    padding: 0 @navbar-padding-horizontal / 2;
+  padding: 0 @navbar-padding-horizontal / 2;
 }
 
 .main-section {
-    padding-top: 30px;
-    padding-bottom: 30px;
-    
-    @media (min-width: @screen-sm-min) {
-        padding-top: 60px;
-        padding-bottom: 60px;
-    }
-    
-    > h1:first-child, > .row > .col > h1:first-child {
-        margin-top: 0;
-    }
+  padding-top: 30px;
+  padding-bottom: 30px;
+  
+  @media (min-width: @screen-sm-min) {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+  
+  > h1:first-child, > .row > .col > h1:first-child {
+    margin-top: 0;
+  }
 }
 
 .circle {
-    background: @component-active-bg;
-    display: inline-block;
-    color: @component-active-color;
-    font-size: 48px;
-    line-height: 1.5em;
-    width: 1.5em;
-    height: 1.5em;
-    border-radius: .75em;
+  background: @component-active-bg;
+  display: inline-block;
+  color: @component-active-color;
+  font-size: 48px;
+  line-height: 1.5em;
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: .75em;
 }
 
 .footer {
-    background: @brand-primary;
+  background: @brand-primary;
+  color: white;
+  
+  a:hover, h4 {
+    color: @bg-color;
+  }
+  
+  a {
     color: white;
-    
-    a:hover, h4 {
-        color: @bg-color;
-    }
-    
-    a {
-        color: white;
-    }
-    
-    .copyright {
-        margin-top: 20px;
-        font-size: .8em;
-        color: @bg-color;
-    }
+  }
+  
+  .copyright {
+    margin-top: 20px;
+    font-size: .8em;
+    color: @bg-color;
+  }
 }

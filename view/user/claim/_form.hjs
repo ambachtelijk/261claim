@@ -1,0 +1,194 @@
+<div class="row">
+  <div class="col col-md-8">
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Booking information</h3>
+      </div>
+      <div class="panel-body">
+        <div class="form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-sm-3">Booking agency</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" ng-model="claim.agency"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3">Booking reference</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" ng-model="claim.reference"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3">Traveller name</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" ng-model="claim.traveller"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3">Price</label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <span class="input-group-addon"><span class="fa fa-euro"></span></span>
+                <input type="text" class="form-control text-right" ng-model="claim.price"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer text-right">
+        <button class="btn btn-success" ng-click="save()"><span class="fa fa-fw fa-save"></span> Save</button>
+        
+      </div>
+    </div>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Itinerary</h3>
+      </div>
+      <ul class="list-group">
+        <li class="list-group-item form-horizontal" ng-repeat="leg in claim.legs">
+          <div class="pull-right">
+            <button class="btn btn-xs btn-warning"><span class="fa fa-fw fa-refresh"></span></button>
+            <button class="btn btn-xs btn-danger"><span class="fa fa-fw fa-trash"></span></button>
+          </div>
+          
+          <h4 style="margin-top: .25em;">{{leg.airline.iata}} {{leg.number}} <small>{{leg.airline.name}}</small></h4>
+          <div class="form-group">
+            <label class="control-label col-sm-3">Operator</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" ng-model="leg.airline.name"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3">Flight Number</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" ng-model="leg.number"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3">Date</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" ng-model="leg.date"/>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="control-label col-sm-3">Time</label>
+            <div class="col-sm-9">
+              <table class="table table-condensed table-hover ng-scope form-group-sm" style="margin-bottom: 0;">
+                <thead>
+                  <tr>
+                    <th class="text-nowrap">
+                    </th>
+                    <th style="width: 50%" class="text-center">
+                      <input type="text" class="form-control" ng-model="leg.origin.iata"/>
+                    </span></th>
+                    <th style="width: 50%" class="text-center">
+                      <input type="text" class="form-control" ng-model="leg.destination.iata"/>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><label class="control-label">Planned</label></td>
+                    <td class="text-center ng-binding">
+                      <input type="text" class="form-control" ng-model="leg.departure"/>
+                    </td>
+                    <td class="text-center ng-binding">
+                      <input type="text" class="form-control" ng-model="leg.arrival"/>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="text-nowrap"><label class="control-label">Actual</label></td>
+                    <td class="text-center">
+                      <input type="text" class="form-control" ng-model="leg.actualDeparture"/>
+                    </td>
+                    <td class="text-center">
+                      <input type="text" class="form-control" ng-model="leg.actualArrival"/>
+                    </td>
+                  </tr>
+                  <tr ng-hide="!flight.diff.arrival" class="ng-hide">
+                    <td><label class="control-label">Delay</label></td>
+                    <td class="text-center ng-binding">
+                      <span ng-show="flight.diff.departure.h > 0" class="ng-binding ng-hide">h,</span> 
+                       min
+                    </td>
+                    <td class="text-center ng-binding">
+                      <span ng-show="flight.diff.arrival.h > 0" class="ng-binding ng-hide">h,</span>
+                       min
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          
+          <div class="form-group">
+            <label class="control-label col-sm-3">Distance</label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <input type="text" class="form-control text-right" ng-model="leg.distance"/>
+                <span class="input-group-addon">km</span>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="panel-footer text-right">
+        
+        <button class="btn btn-primary"><span class="fa fa-fw fa-plus"></span> Add Leg</button>
+        <button class="btn btn-success" ng-click="save()"><span class="fa fa-fw fa-save"></span> Save</button>
+        
+      </div>
+    </div>
+    
+    
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Expenses</h3>
+      </div>
+      
+      <!--div class="panel-body">
+      </div-->
+      <div class="panel-footer text-right">
+        
+        <button class="btn btn-primary"><span class="fa fa-fw fa-plus"></span> Add Expense</button>
+        <button class="btn btn-success" ng-click="save()"><span class="fa fa-fw fa-save"></span> Save</button>
+        
+      </div>
+    </div>
+    
+  </div>
+  
+  
+  
+  <div class="col col-md-4">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">Compensation Overview</h3>
+      </div>
+      <table class="table">
+        <tr>
+          <td>Ticket DME - AMS</td>
+          <td class="text-right text-nowrap">&euro; 89,00</td>
+        </tr>
+        
+        <tr>
+          <td>EC 261/2004</td>
+          <td class="text-right text-nowrap">&euro; 250,00</td>
+        </tr>
+        
+        <!--tr>
+          <td>Phone expenses lorem ipsum dolor sit amet<br/><small>Lipsum</small></td>
+          <td class="text-right text-nowrap">&euro; 25,99</td>
+        </tr-->
+        
+        <tr>
+          <td><strong>Total</strong></td>
+          <td class="text-right text-nowrap"><strong>&euro; 339,00</strong></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

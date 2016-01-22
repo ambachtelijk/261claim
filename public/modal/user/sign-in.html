@@ -1,41 +1,41 @@
 <div class="modal-header">
-    <h3 class="modal-title">Sign in</h3>
-    <span>Don't have an account yet? <a href="#" ng-click="cancel(); signUp();">Sign up for a free account now &raquo;</a></span>
+  <h3 class="modal-title">Sign in</h3>
+  <span>Don't have an account yet? <a href="#" ng-click="cancel(); $emit('userSignUp');">Sign up for a free account now &raquo;</a></span>
 </div>
 <div class="modal-body form-horizontal" ng-keyup="$event.keyCode == 13 && signInValidate()">
-    <div class="alert alert-danger help-block" ng-show="userModalError">
-        <h4>An error occurred ({{userModalError.status}})</h4>
-        <p ng-bind-html="userModalError.message"></p>
+  <div class="alert alert-danger help-block" ng-show="userModalError">
+    <h4>An error occurred ({{userModalError.status}})</h4>
+    <p ng-bind-html="userModalError.message"></p>
+  </div>
+  <div class="form-group" ng-class="{'has-error': userModalError}">
+    <label class="col-sm-4 control-label" for="email">Email Address</label>
+    <div class="col-sm-8">
+      <div class="input-group">
+        <span class="input-group-addon"><span class="fa fa-fw fa-user"></span></span>
+        <input type="email" id="email" ng-model="userModalModel.email" class="form-control" placeholder="Email Address" required />
+      </div>
     </div>
-    <div class="form-group" ng-class="{'has-error': userModalError}">
-        <label class="col-sm-4 control-label" for="email">Email Address</label>
-        <div class="col-sm-8">
-            <div class="input-group">
-                <span class="input-group-addon"><span class="fa fa-fw fa-user"></span></span>
-                <input type="email" id="email" ng-model="userModalModel.email" class="form-control" placeholder="Email Address" required />
-            </div>
-        </div>
+  </div>
+  <div class="form-group" ng-class="{'has-error': userModalError}">
+    <label class="col-sm-4 control-label" for="password">Password</label>
+    <div class="col-sm-8">
+      <div class="input-group">
+        <span class="input-group-addon"><span class="fa fa-fw fa-lock"></span></span>
+        <input type="password" id="password" ng-model="userModalModel.password" class="form-control" placeholder="Password" required />
+      </div>
     </div>
-    <div class="form-group" ng-class="{'has-error': userModalError}">
-        <label class="col-sm-4 control-label" for="password">Password</label>
-        <div class="col-sm-8">
-            <div class="input-group">
-                <span class="input-group-addon"><span class="fa fa-fw fa-lock"></span></span>
-                <input type="password" id="password" ng-model="userModalModel.password" class="form-control" placeholder="Password" required />
-            </div>
-        </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-4">
+      <div class="checkbox checkbox-primary">
+        <input type="checkbox" value="remember" id="remember" ng-model="userModalModel.remember" checked />
+        <label for="remember">Remember me</label>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-sm-8 col-sm-offset-4">
-            <div class="checkbox checkbox-primary">
-                <input type="checkbox" value="remember" id="remember" ng-model="userModalModel.remember" checked />
-                <label for="remember">Remember me</label>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-link pull-left" type="button">Forgot Password?</button>
-    <button class="btn btn-link" type="button" ng-click="cancel()">Cancel</button>
-    <button class="btn btn-primary" type="button" ng-click="signInValidate()">Sign in</button>
+  <button class="btn btn-link pull-left" type="button">Forgot Password?</button>
+  <button class="btn btn-link" type="button" ng-click="cancel()">Cancel</button>
+  <button class="btn btn-primary" type="button" ng-click="signInValidate()">Sign in</button>
 </div>

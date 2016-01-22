@@ -1,0 +1,47 @@
+<div class="main-section container" ng-controller="UserClaimController" ng-init="actionIndex()">
+  <h1>Manage Claims</h1>
+  <p><a href="/user/claim/create" class="btn btn-primary"><span class="fa fa-fw fa-plus"></span> New Claim</a></p>
+  <div class="panel">
+    <table class="table">
+      <thead>
+        <tr>
+          <td>Status</td>
+          <td>Trip</td>
+          <td>Traveller</td>
+          <td>Date</td>
+          <td>Value</td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="claim in claims">
+          <td>Creating</td>
+          <td>{{claim.agency}}</td>
+          <td>{{claim.traveller}}</td>
+          <td>{{claim.date}}</td>
+          <td class="text-right text-nowrap">{{claim.price | currency : "€ " : 2}}</td>
+          <td class="text-right text-nowrap">
+            <a href="/user/claim/read/{{claim.id}}"><span class="fa fa-eye"></span></a>
+            <a href="/user/claim/update/{{claim.id}}"><span class="fa fa-pencil"></span></a>
+            <a href="/user/claim/delete/{{claim.id}}"><span class="fa fa-trash"></span></a>
+          </td>
+        </tr>
+        <tr ng-show="claims.length === 0">
+          <td colspan="6" class="text-center">
+            <em>No claims to display. <a href="/user/claim/create">Create a new claim</a>.</em>
+          </td>
+        </tr>
+        <tr ng-show="claims === false">
+          <td colspan="6" class="text-center">
+            <em>{{error.message}}</em>
+          </td>
+        </tr>
+        <tr ng-hide="claims !== null">
+          <td colspan="6" class="text-center">
+            <em><span class="fa fa-fw fa-spinner fa-pulse"></span> Loading claims...</em>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

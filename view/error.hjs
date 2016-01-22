@@ -1,9 +1,9 @@
 <div class="container main-section">
-    <div class="row">
-        <div class="col col-xs-12">
-            <h1>[[ error.message ]]</h1>
-            <h2>[[ error.status ]]</h2>
-            <pre>[[ error.stack ]]</pre>
-        </div>
+  <div class="row">
+    <div class="col col-xs-12">
+      <h1>[[ error.message ]]</h1>
+      <h2>[[ error.status ]]</h2>
+      <pre>[[ error.stack ]]</pre>
     </div>
+  </div>
 </div>

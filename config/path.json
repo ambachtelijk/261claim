@@ -1,20 +1,20 @@
 {
-    "controller": {
-        "basedir": "controller",
-        "suffix": "Controller.js",
-        "name": "index",
-        "action": "index",
-        "abstract": {
-            "location": "controller/_abstract",
-            "order": [
-                ["base"],
-                ["web", "api"],
-                ["admin"]
-            ]
-        }
-    },
-    "model": "model",
-    "view": "view",
-    "public": "public",
-    "component": "component"
+  "controller": {
+    "basedir": "controller",
+    "suffix": "Controller.js",
+    "name": "index",
+    "action": "index",
+    "abstract": {
+      "location": "controller/_abstract",
+      "order": [
+        ["base"],
+        ["web", "api"],
+        ["admin"]
+      ]
+    }
+  },
+  "model": "model",
+  "view": "view",
+  "public": "public",
+  "component": "component"
 }

@@ -1,0 +1,4 @@
+<div class="main-section container" ng-controller="UserClaimController" ng-init="action = 'update/[[req.params]]'; actionUpdate([[req.params]])">
+  <h1>Update Claim</h1>
+  [[> ../_form]]
+</div>

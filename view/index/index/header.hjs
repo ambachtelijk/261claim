@@ -1,102 +1,102 @@
 <section class="main-section header">
-    <div class="container">
-        <h1 class="text-center">Cancelled or delayed flight?<!--br/><small>- or -</small><br/>Lost or delayed luggage?--></h1>
-        <div class="row">
-            <div class="col col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
-                <div class="box" ng-controller="IndexHeaderController" ng-init="create();" ng-keyup="$event.keyCode == 13 && getFlightData()">
-                <!--div class="box" ng-controller="IndexHeaderController" ng-init="getFlightData()" ng-keyup="$event.keyCode == 13 && getFlightData()"-->
-                    <div class="title">
-                        <div class="pull-right">
-                            <button 
-                                class="btn btn-inline-link" 
-                                uib-popover-template="'popoverItinerary'" 
-                                popover-title="Itinerary" 
-                                popover-trigger="mouseenter" 
-                                popover-placement="left"
-                                >
-                                <span class="fa fa-2x fa-question-circle"></span>
-                            </button>
-                        </div>
-                        <h2 class="text-center" style="margin: 0 1.5em;">Calculate Your Compensation</h2>
-                    </div>
-                    <div class="content">
-                        <div ng-repeat="leg in legs">
-                            <div class="btn-close">
-                                <div class="form-group">
-                                    <a href="#" ng-click="delete($index)"><span class="fa fa-lg fa-times-circle"></span></a>
-                                </div>
-                            </div>
-                            <div class="form row">
-                                <div 
-                                    class="col col-sm-6 form-group"
-                                    uib-popover-template="'popoverFlight'" 
-                                    popover-title="Flight number" 
-                                    popover-trigger="mouseenter" 
-                                    popover-placement="top"
-                                    >
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-fw fa-plane"></span>
-                                        </span>    
-                                        <ui-select ng-model="leg.airline" style="width: 67%;">
-                                            <ui-select-match allow-clear placeholder="Airline Code">
-                                                <span ng-bind="$select.selected.iata"></span>
-                                            </ui-select-match>
-                                            <ui-select-choices
-                                                repeat="airline in airlines"
-                                                group-by="'matchedBy'"
-                                                refresh="getAirlines($select.search)"
-                                                refresh-delay="0"
-                                                position="down"
-                                                >
-                                                <kbd ng-bind-html="airline.iata | highlight: $select.search" style="font-size: 16px;"></kbd>
-                                                &nbsp;
-                                                <span ng-bind-html="airline.name | highlight: $select.search"></span>
-                                            </ui-select-choices>
-                                        </ui-select>
-                                        <input 
-                                            type="text" 
-                                            placeholder="1234" 
-                                            class="form-control text-right" 
-                                            style="width: 33%; border-left: 0;"
-                                            ng-model="leg.flight"
-                                            />
-                                    </div>
-                                </div>
-                                <div
-                                    class="col col-sm-6 form-group"
-                                    uib-popover-template="'popoverDate'" 
-                                    popover-title="Departure date and time" 
-                                    popover-trigger="mouseenter" 
-                                    popover-placement="top"
-                                    >
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <span class="fa fa-fw fa-calendar"></span>
-                                        </span>
-                                        <input 
-                                            type="date" 
-                                            ng-model="leg.date"
-                                            max="{{today|date:'yyyy-MM-dd'}}" 
-                                            ng-max="{{today|date:'yyyy-MM-dd'}}" 
-                                            class="form-control text-right"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <hr ng-hide="$last" />
-                        </div>
-                        <div class="action row">
-                            <div class="col col-md-12 text-center">
-                                <button class="btn btn-link" ng-click="create();" ng-hide="hasMaxLegs()"><span class="fa fa-plus"></span> Add Leg</button>
-                                <button class="btn btn-success" ng-click="getFlightData();"><span class="fa fa-calculator"></span> Calculate Compensation</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+  <div class="container">
+    <h1 class="text-center">Cancelled or delayed flight?<!--br/><small>- or -</small><br/>Lost or delayed luggage?--></h1>
+    <div class="row">
+      <div class="col col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8">
+        <div class="box" ng-controller="IndexHeaderController" ng-init="create();" ng-keyup="$event.keyCode == 13 && getFlightData()">
+        <!--div class="box" ng-controller="IndexHeaderController" ng-init="getFlightData()" ng-keyup="$event.keyCode == 13 && getFlightData()"-->
+          <div class="title">
+            <div class="pull-right">
+              <button 
+                class="btn btn-inline-link" 
+                uib-popover-template="'popoverItinerary'" 
+                popover-title="Itinerary" 
+                popover-trigger="mouseenter" 
+                popover-placement="left"
+                >
+                <span class="fa fa-2x fa-question-circle"></span>
+              </button>
             </div>
+            <h2 class="text-center" style="margin: 0 1.5em;">Calculate Your Compensation</h2>
+          </div>
+          <div class="content">
+            <div ng-repeat="leg in legs">
+              <div class="btn-close">
+                <div class="form-group">
+                  <a href="#" ng-click="delete($index)"><span class="fa fa-lg fa-times-circle"></span></a>
+                </div>
+              </div>
+              <div class="form row">
+                <div 
+                  class="col col-sm-6 form-group"
+                  uib-popover-template="'popoverFlight'" 
+                  popover-title="Flight number" 
+                  popover-trigger="mouseenter" 
+                  popover-placement="top"
+                  >
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <span class="fa fa-fw fa-plane"></span>
+                    </span>  
+                    <ui-select ng-model="leg.airline" style="width: 67%;">
+                      <ui-select-match allow-clear placeholder="Airline Code">
+                        <span ng-bind="$select.selected.iata"></span>
+                      </ui-select-match>
+                      <ui-select-choices
+                        repeat="airline in airlines"
+                        group-by="'matchedBy'"
+                        refresh="getAirlines($select.search)"
+                        refresh-delay="0"
+                        position="down"
+                        >
+                        <kbd ng-bind-html="airline.iata | highlight: $select.search" style="font-size: 16px;"></kbd>
+                        &nbsp;
+                        <span ng-bind-html="airline.name | highlight: $select.search"></span>
+                      </ui-select-choices>
+                    </ui-select>
+                    <input 
+                      type="text" 
+                      placeholder="1234" 
+                      class="form-control text-right" 
+                      style="width: 33%; border-left: 0;"
+                      ng-model="leg.flight"
+                      />
+                  </div>
+                </div>
+                <div
+                  class="col col-sm-6 form-group"
+                  uib-popover-template="'popoverDate'" 
+                  popover-title="Departure date and time" 
+                  popover-trigger="mouseenter" 
+                  popover-placement="top"
+                  >
+                  <div class="input-group">
+                    <span class="input-group-addon">
+                      <span class="fa fa-fw fa-calendar"></span>
+                    </span>
+                    <input 
+                      type="date" 
+                      ng-model="leg.date"
+                      max="{{today|date:'yyyy-MM-dd'}}" 
+                      ng-max="{{today|date:'yyyy-MM-dd'}}" 
+                      class="form-control text-right"
+                    />
+                  </div>
+                </div>
+              </div>
+              <hr ng-hide="$last" />
+            </div>
+            <div class="action row">
+              <div class="col col-md-12 text-center">
+                <button class="btn btn-link" ng-click="create();" ng-hide="hasMaxLegs()"><span class="fa fa-plus"></span> Add Leg</button>
+                <button class="btn btn-success" ng-click="getFlightData();"><span class="fa fa-calculator"></span> Calculate Compensation</button>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
 <script type="text/ng-template" id="popoverItinerary">
 <p>Please enter the full itinerary as you booked it. If your itinerary consisted of multiple flights, you can add more flights by clicking on the <kbd>Add Leg</kbd> button.</p>

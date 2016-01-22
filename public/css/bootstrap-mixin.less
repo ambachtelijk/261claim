@@ -1,6 +1,6 @@
 /* Never asked for the fugly outline in the first place */
 *, *:before, *:after {
-    outline: none !important;
+  outline: none !important;
 
 }
 
@@ -8,74 +8,74 @@
  * Could not adjusted with LESS variables
  */
 .navbar-toggle {
-    padding: 6px 3px;
+  padding: 6px 3px;
 }
 
 .btn {
 
-    &.btn-inline-link {
-        .btn-link;
-        padding: 0;
-    }
+  &.btn-inline-link {
+    .btn-link;
+    padding: 0;
+  }
 }
 
 /**
  * XXS breakpoint for visibility. Is missing in Bootstrap 3
  *//*
 .test {
-    width: ~`console.log("@{min-xs-width}"), '3px';
+  width: ~`console.log("@{min-xs-width}"), '3px';
 }*/
 .hidden-xxs {
   @media (max-width: (@screen-xs-min - 1)) {
-    .responsive-invisibility();
+  .responsive-invisibility();
   }
 }
 
 .visible-xxs {
   @media (max-width: (@screen-xs-min - 1)) {
-    .responsive-visibility();
+  .responsive-visibility();
   }
 }
 .visible-xxs-block {
   @media (max-width: (@screen-xs-min - 1)) {
-    display: block !important;
+  display: block !important;
   }
 }
 .visible-xxs-inline {
   @media (max-width: (@screen-xs-min - 1)) {
-    display: inline !important;
+  display: inline !important;
   }
 }
 .visible-xxs-inline-block {
   @media (max-width: (@screen-xs-min - 1)) {
-    display: inline-block !important;
+  display: inline-block !important;
   }
 }
 
 .hidden-xs {
   @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
-    .responsive-invisibility();
+  .responsive-invisibility();
   }
 }
 
 .visible-xs {
   @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
-    .responsive-visibility();
+  .responsive-visibility();
   }
 }
 .visible-xs-block {
   @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
-    display: block !important;
+  display: block !important;
   }
 }
 .visible-xs-inline {
   @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
-    display: inline !important;
+  display: inline !important;
   }
 }
 .visible-xs-inline-block {
   @media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
-    display: inline-block !important;
+  display: inline-block !important;
   }
 }
 
@@ -83,27 +83,27 @@
  * Create .form-text class to force texts to comply with the form dimensions
  */
 .form-text {
-    display: inline-block;
-    padding-top: (@padding-base-vertical);
-    font-size: @font-size-base;
+  display: inline-block;
+  padding-top: (@padding-base-vertical);
+  font-size: @font-size-base;
 }
-    
+  
 .form-group-sm {
-    .form-text {
-        padding-top: (@padding-small-vertical);
-        font-size: @font-size-small;
-    }
+  .form-text {
+    padding-top: (@padding-small-vertical);
+    font-size: @font-size-small;
+  }
 }
 
 .form-group-lg {
-    .form-text {
-        padding-top: (@padding-large-vertical);
-        font-size: @font-size-large;
-    }
+  .form-text {
+    padding-top: (@padding-large-vertical);
+    font-size: @font-size-large;
+  }
 }
 
 .ui-select-bootstrap .ui-select-choices-row>a {
-    line-height: @line-height-base;
+  line-height: @line-height-base;
 }
 
 
